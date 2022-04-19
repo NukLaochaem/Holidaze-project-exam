@@ -1,0 +1,32 @@
+
+.hotels-banner {
+  background-image: "";
+  background-color: #cccccc;
+  height: 500px;
+  text-align: center;
+
+  position: relative;
+  .hotels-banner-text{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.filter-container{
+  height: 100px;
+  background-color: #a5a5a5;
+  position: relative;
+  .filter{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.hotels-container{
+  padding: 1rem;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}

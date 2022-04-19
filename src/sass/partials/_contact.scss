@@ -1,0 +1,30 @@
+.form-container{
+  background-color: white;
+  button{
+    color: $primary;
+    background-color: white;
+    border-color: $primary;
+  }  
+  button:hover{
+    background-color:  $primary;
+    color: white;
+    border-color: $primary;
+  }
+}
+
+.accordion-container{
+  button{
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  .accordion-button:not(.collapsed){
+    color: black;
+    background-color: $secondary;  
+  }
+
+  .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+  } 
+}
+

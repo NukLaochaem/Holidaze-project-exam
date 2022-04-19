@@ -1,10 +1,9 @@
-import Heading from "../components/layout/heading";
+import Layout from "../components/layout/Layout";
 
 export default function Booking() {
   return (
-    <>
-      <Heading>Booking page</Heading>
+    <Layout>
       <p>This is the booking page</p>
-    </>
+    </Layout>
   );
 }

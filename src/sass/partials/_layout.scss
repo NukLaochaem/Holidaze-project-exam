@@ -1,0 +1,38 @@
+a{
+  text-decoration: none;
+}
+
+nav{
+  background-color: $bg-color;
+  color: black;
+  a{
+    padding: 0.5rem 1rem;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 500;
+  } & :hover{
+    color: $primary;
+  } 
+}
+.wrapper{
+  background-color: $bg-color;
+}
+
+footer{
+  background-color: $footer-color;
+  color: white;
+  padding-top: 0.5rem ;
+  a {
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: white;
+  } 
+  .footer-text{
+    font-size: "";
+  }
+  .copyRight{
+    font-size: 0.8rem;
+    color: $grey;
+    margin: 0;
+  }
+}

@@ -1,20 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
-@import "./partials/nav";
+@import "./partials/variable";
+@import "./partials/custom";
 @import "./partials/typography";
+@import "./partials/layout";
+@import "./partials/typography";
+@import "./partials/home";
+@import "./partials/hotels";
+@import "./partials/contact";
+@import "./partials/login";
+@import "./partials/detail";
+@import "./partials/admin";
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 

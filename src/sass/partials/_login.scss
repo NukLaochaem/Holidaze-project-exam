@@ -1,0 +1,18 @@
+.login-container{
+  background-color: white;
+
+  form{
+    padding: 1rem 0;
+  }
+  button{
+    color: white;
+    background-color: $primary;
+    border-color: $primary;
+  }  
+  button:hover{
+    background-color: white;
+    border-color: $primary;
+    color: $primary;
+  }
+    
+}

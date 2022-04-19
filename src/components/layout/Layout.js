@@ -1,43 +1,41 @@
 import { Nav, Container, Navbar } from "react-bootstrap";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import Admin from "../../pages/admin";
-import Booking from "../../pages/booking";
-import Contact from "../../pages/contact";
-import HotelDetails from "../../pages/hotelDetails";
-import Hotels from "../../pages/hotels";
-import Login from "../../pages/login";
-import Home from "../../pages/home";
-
-function Layout() {
+function Layout({ children }) {
   return (
     <>
-      <BrowserRouter>
-        <Navbar bg="dark" variant="dark" expand="lg">
-          <Container fluid>
-            <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/hotels">Hotels</Nav.Link>
-                <Nav.Link href="/contact">Contact</Nav.Link>
-                <Nav.Link href="/login">Login</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+      <Navbar expand="lg">
+        <Container fluid>
+          <Link to="/" className="m-auto">
+            Holidaze
+          </Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              <Link to="/">Home</Link>
+              <Link to="/hotels">Hotels</Link>
+              <Link to="/contact">Contact</Link>
+              <Link to="/login">Login</Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/hotels" element={<Hotels />}></Route>
-          <Route path="/hotelDetails/:id" element={<HotelDetails />}></Route>
-          <Route path="/booking" element={<Booking />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/admin" element={<Admin />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <div className="wrapper">{children}</div>
+
+      <footer className="">
+        <Container className="text-center">
+          <h4 className="py-3">Logo</h4>
+          <Link to="/">Home</Link>
+          <Link to="/hotels">Hotels</Link>
+          <Link to="/contact">Contact</Link>
+          <p className="footer-text mt-4">
+            Holidaze is a local tourism agency in Bergen
+          </p>
+          <p className="footer-text">Norway, Bergen 5007</p>
+          <p className="copyRight">@ Holidaze 2022 | All rights Reserved</p>
+        </Container>
+      </footer>
     </>
   );
 }

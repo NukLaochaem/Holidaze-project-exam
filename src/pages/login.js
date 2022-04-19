@@ -1,4 +1,4 @@
-import Heading from "../components/layout/heading";
+import Layout from "../components/layout/Layout";
 import { Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -47,35 +47,43 @@ export default function Login() {
   }
 
   return (
-    <Container>
-      <Heading>Admin Login page</Heading>
+    <Layout>
+      <Container className="login-container p-4">
+        <h1 className="login-header py-2 text-center">Admin Login page</h1>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        {loginError && <h5 className="error">{loginError}</h5>}
-        <fieldset disabled={submitting}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
-            <Form.Control placeholder="Username" {...register("username")} />
-            {errors.username && (
-              <Form.Text className="error">{errors.username.message}</Form.Text>
-            )}
-          </Form.Group>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          {loginError && <h5 className="error">{loginError}</h5>}
+          <fieldset disabled={submitting}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Username</Form.Label>
+              <Form.Control placeholder="Username" {...register("username")} />
+              {errors.username && (
+                <Form.Text className="error">
+                  {errors.username.message}
+                </Form.Text>
+              )}
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-            />
-            {errors.password && (
-              <Form.Text className="error">{errors.password.message}</Form.Text>
-            )}
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <Form.Text className="error">
+                  {errors.password.message}
+                </Form.Text>
+              )}
+            </Form.Group>
 
-          <Button type="submit">{submitting ? "Loggin in..." : "Login"}</Button>
-        </fieldset>
-      </Form>
-    </Container>
+            <Button type="submit" className="my-2">
+              {submitting ? "Loggin in..." : "Login"}
+            </Button>
+          </fieldset>
+        </Form>
+      </Container>
+    </Layout>
   );
 }

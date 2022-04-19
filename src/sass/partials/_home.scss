@@ -1,0 +1,32 @@
+.landing-wrapper {
+  background-image: "";
+  background-color: #cccccc;
+  height: 500px;
+  text-align: center;
+
+  position: relative;
+  .landing-text{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.tour{
+  height: 200px;
+  background-color: #a5a5a5;
+  position: relative;
+  .tour-text{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.home-card{
+  background-color: antiquewhite;
+  margin: 2rem 0;
+  height: 300px;
+}

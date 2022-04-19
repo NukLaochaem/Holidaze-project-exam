@@ -1,8 +1,15 @@
-/* make the customizations */
-$theme-colors: (
-    "info": tomato,
-    "danger": teal
-);
-
-
-@import "~bootstrap/scss/bootstrap";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: $bg-color;
+}
+.wrapper {
+  min-height: calc(100vh - 70px);
+}
+a{
+  color: black;
+  text-decoration: none;
+}
