@@ -20,7 +20,7 @@ export default function Hotels() {
           <div className="hotels-card-container p-4">
             <h3 className="hotles-name">Hotels name</h3>
             <p className="hotels-location">Location 500m</p>
-            <h4 className="rom-detail">Rom Stand</h4>
+            <h4 className="rom-detail">Description</h4>
             <p className="hotels-info">
               Situated by the UNESCO World Heritage Site of Bryggen Wharf, 300
               metres from the fish market, is Radisson Blu Royal Hotel, Bergen.
@@ -44,7 +44,7 @@ export default function Hotels() {
           <div className="hotels-card-container p-4">
             <h3 className="hotles-name">Hotels name</h3>
             <p className="hotels-location">Location 500m</p>
-            <h4 className="rom-detail">Rom Stand</h4>
+            <h4 className="rom-detail">Description</h4>
             <p className="hotels-info">
               Situated by the UNESCO World Heritage Site of Bryggen Wharf, 300
               metres from the fish market, is Radisson Blu Royal Hotel, Bergen.
