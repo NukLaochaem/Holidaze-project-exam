@@ -1,21 +1,46 @@
 import { Nav, Container, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Layout({ children }) {
+  let activeStyle = {
+    textDecoration: "underline 3px black solid",
+    textUnderlineOffset: "3px",
+  };
+
   return (
     <>
       <Navbar expand="lg">
         <Container fluid>
-          <Link to="/" className="m-auto">
-            Holidaze
+          <Link to="/" className="m-auto p-0 ms-lg-3">
+            <img src="/image/logo.png" alt="Holidaze-Logo" />
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Link to="/">Home</Link>
-              <Link to="/hotels">Hotels</Link>
-              <Link to="/contact">Contact</Link>
-              <Link to="/login">Login</Link>
+              <NavLink
+                to="/"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/hotels"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Hotels
+              </NavLink>
+              <NavLink
+                to="/contact"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Contact
+              </NavLink>
+              <NavLink
+                to="/login"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Login
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -25,10 +50,18 @@ function Layout({ children }) {
 
       <footer className="">
         <Container className="text-center">
-          <h4 className="py-3">Logo</h4>
-          <Link to="/">Home</Link>
-          <Link to="/hotels">Hotels</Link>
-          <Link to="/contact">Contact</Link>
+          <div>
+            <Link to="/">
+              <img
+                src="/image/logo.png"
+                alt="Holidaze-Logo"
+                className="footer-logo"
+              />
+            </Link>
+          </div>
+          <Link to="/">• Home</Link>
+          <Link to="/hotels">• Hotels</Link>
+          <Link to="/contact">• Contact</Link>
           <p className="footer-text mt-4">
             Holidaze is a local tourism agency in Bergen
           </p>

@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "../src/pages/Admin";
 import Booking from "../src/pages/Booking";
 import Contact from "../src/pages/Contact";
-import HotelDetails from "./pages/HotelDetails";
+import Detail from "./pages/Detail";
 import Hotels from "./pages/Hotels";
 import Login from "../src/pages/Login";
 import Home from "../src/pages/Home";
@@ -18,7 +18,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/hotels" element={<Hotels />}></Route>
-        <Route path="/hotelDetails/:id" element={<HotelDetails />}></Route>
+        <Route path="/detail/:id" element={<Detail />}></Route>
         <Route path="/booking" element={<Booking />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/login" element={<Login />}></Route>

@@ -13,3 +13,70 @@ a{
   color: black;
   text-decoration: none;
 }
+.main-nav:active{
+  text-decoration: underline 1px black solid;
+  text-underline-offset: 3px;
+}
+
+@mixin buttonColorPrimary {
+  color: $primary;
+  background-color: white;
+  border-color: $primary;
+  font-weight: 500;
+  &:hover{
+    color: white;
+    background-color: $primary;
+    border-color: $primary;
+  }
+  &:focus  {
+    color: $primary;
+    background-color: white;
+    border-color: $primary;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  &:active{
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+@mixin buttonColorSecondary{
+  color: white;
+  background-color: $primary;
+  border-color: $primary;
+  font-weight: 500;
+  &:hover{
+    color: white;
+    background-color: darken($primary, 15%);
+    border-color: darken($primary, 15%);
+  }
+  &:focus  {
+    background-color: $primary;
+    border-color: $primary;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  &:active{
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+/*
+.btn {
+  display: inline-block;
+  padding: 1em;
+  color: white;
+  text-decoration: none;
+}
+
+.btn-success {
+  @extend .btn;
+  background-color: $primary-color;
+  @include rounded;
+}
+
+.btn-error {
+  @extend .btn;
+  background-color: $secondary-color;
+}*/

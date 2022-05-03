@@ -5,14 +5,7 @@
     padding: 1rem 0;
   }
   button{
-    color: white;
-    background-color: $primary;
-    border-color: $primary;
+    @include buttonColorPrimary;
   }  
-  button:hover{
-    background-color: white;
-    border-color: $primary;
-    color: $primary;
-  }
     
 }

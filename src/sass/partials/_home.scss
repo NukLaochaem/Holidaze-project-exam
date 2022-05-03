@@ -1,23 +1,57 @@
-.landing-wrapper {
-  background-image: "";
+.home-hero-container {
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url("../../../public/image/bergenCity.jpg");
   background-color: #cccccc;
-  height: 500px;
-  text-align: center;
-
+  height: 400px;
+  background-position: center bottom;
+  background-repeat: no-repeat; 
+  background-size: cover; 
   position: relative;
-  .landing-text{
+
+  h1{
+    color: white;
+  }
+  .home-text-wrapper{
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 30%;
     transform: translate(-50%, 0);
   }
+  form{
+    background-color: #ffffff;
+    color: black;
+    width: 300px;
+    height: 44px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  form input[type=text]{
+    all: unset;
+    color: black;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+  }
+  form button{
+    all: unset;
+    width: 44px;
+    height: 44px;
+  }
+
 }
 
 .tour{
-  height: 200px;
-  background-color: #a5a5a5;
+  background-image: url("../../../public/image/fjords.jpg");
+  background-position: left bottom;
+  background-repeat: no-repeat; 
+  background-color: #cccccc;
+  background-size: cover; 
+  height: 300px;
   position: relative;
+
   .tour-text{
+    color: white;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -25,8 +59,40 @@
   }
 }
 
-.home-card{
-  background-color: antiquewhite;
-  margin: 2rem 0;
-  height: 300px;
+.home-card-container{
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  padding: 0px;
+  background-color: white;
+
+  .home-card1{
+  background-image: url("../../../public/image/hotels.jpg");
+  background-position: center top;
+  background-repeat: no-repeat; 
+  background-color: #cccccc;
+  background-size: cover; 
+  height: 250px;
+  padding: 0px;
+  }
+  button{
+    @include buttonColorSecondary;
+  }
+
+  .home-card2{
+    background-image: url("../../../public/image/light.jpg");
+    background-position: bottom;
+    background-repeat: no-repeat; 
+    background-color: #cccccc;
+    background-size: cover; 
+    height: 450px;
+    padding: 0px;
+    position: relative;
+    .card2-text{
+      position: absolute;
+      color: white;
+      top: 85%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+    }
+
+  }
 }

@@ -1,8 +1,9 @@
+import Layout from "../components/layout/Layout";
 import { Form, Button, Container, Accordion } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Layout from "../components/layout/Layout";
+
 //import axios from "axios";
 
 const schema = yup.object().shape({
@@ -79,9 +80,9 @@ export default function Contact() {
                 <Accordion.Header>PARKING</Accordion.Header>
                 <Accordion.Body>
                   <p>
-                    ou can reserve parking spaces at some hotels. If you wish to
-                    reserve a space, please contact the hotel reception or as an
-                    add-on once you have made your booking.
+                    You can reserve parking spaces at some hotels. If you wish
+                    to reserve a space, please contact the hotel reception or as
+                    an add-on once you have made your booking.
                   </p>
                 </Accordion.Body>
               </Accordion.Item>
@@ -128,7 +129,7 @@ export default function Contact() {
                 </Form.Text>
               )}
             </Form.Group>
-            <Button type="submit" className="contact-btn mt-2">
+            <Button type="submit" className="contact-btn mt-2 btn-lg">
               Submit
             </Button>
           </Form>

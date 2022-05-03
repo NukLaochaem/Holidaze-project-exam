@@ -76,24 +76,43 @@ export default function Admin() {
         <Container className="add-container bg-white my-5 p-5">
           <Form className="">
             <h2>Add now hotels</h2>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+
+            <Form.Group className="mb-3">
+              <Form.Label></Form.Label>
+              <Form.Control type="email" placeholder="Hotel name" />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group className="mb-3" controlId="">
+              <Form.Label></Form.Label>
+              <Form.Control type="text" placeholder="Location" />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
+
+            <Form.Group className="mb-3" controlId="">
+              <Form.Label></Form.Label>
+              <Form.Control type="number" placeholder="Price" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+
+            <Form.Group className="mb-3" controlId="">
+              <Form.Label></Form.Label>
+              <Form.Control type="text" placeholder="Details" />
+            </Form.Group>
+
+            <Form.Group class="mb-3">
+              <Form.Label for="formFileMultiple" className="form-label">
+                Images files
+              </Form.Label>
+              <Form.Control
+                className="form-control"
+                type="file"
+                id="formFileMultiple"
+                multiple
+              />
+            </Form.Group>
+
+            <Button type="submit">Submit</Button>
           </Form>
         </Container>
       </Container>

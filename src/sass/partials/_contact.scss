@@ -1,15 +1,8 @@
 .form-container{
   background-color: white;
   button{
-    color: $primary;
-    background-color: white;
-    border-color: $primary;
+    @include buttonColorPrimary;
   }  
-  button:hover{
-    background-color:  $primary;
-    color: white;
-    border-color: $primary;
-  }
 }
 
 .accordion-container{

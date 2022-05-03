@@ -1,24 +1,14 @@
-
 .hotels-banner {
-  background-image: "";
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url("../../../public/image/bergen-street.jpg");
   background-color: #cccccc;
-  height: 500px;
-  text-align: center;
-
+  background-position: center right;
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: 400px;
   position: relative;
+
   .hotels-banner-text{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 0);
-  }
-}
-
-.filter-container{
-  height: 100px;
-  background-color: #a5a5a5;
-  position: relative;
-  .filter{
+    color: white;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -27,6 +17,30 @@
 }
 
 .hotels-container{
-  padding: 1rem;
+  background-color: white;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+  .hotel-img-container{
+    background-color: #cccccc;
+    height: 200px;
+    padding: 0px;
+  }
+  button{
+    @include buttonColorSecondary;
+  }
+}
+
+@media (min-width: 767px){
+
+  .hotels-container{
+    display: flex;
+  }
+  .hotel-img-container{
+    width: 30%;
+    flex-grow: "";
+  }
+  .hotels-card-container{
+    width: 70%;
+  }
+
 }
