@@ -7,7 +7,7 @@ export default function Admin() {
       <Container>
         <h1>Admin page</h1>
 
-        <Container className="booking-container  bg-white p-5 my-5">
+        <Container className="booking-container bg-white p-5 my-5">
           <h2>Booking</h2>
           <Table striped bordered hover>
             <thead>
@@ -23,19 +23,19 @@ export default function Admin() {
                 <td>Mark</td>
                 <td>Kim</td>
                 <td>22/03/2022</td>
-                <td>224/03/2022</td>
+                <td>24/03/2022</td>
               </tr>
               <tr>
                 <td>Jacob</td>
                 <td>Karl</td>
-                <td>15/05/22</td>
-                <td>16/05/22</td>
+                <td>15/05/2022</td>
+                <td>16/05/2022</td>
               </tr>
               <tr>
                 <td>Larry the Bird</td>
                 <td>Ken</td>
-                <td>17/05/22</td>
-                <td>20/05/22</td>
+                <td>17/05/2022</td>
+                <td>20/05/2022</td>
               </tr>
             </tbody>
           </Table>
@@ -85,25 +85,23 @@ export default function Admin() {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="">
+            <Form.Group className="mb-3" controlId="location">
               <Form.Label></Form.Label>
               <Form.Control type="text" placeholder="Location" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="">
+            <Form.Group className="mb-3" controlId="price">
               <Form.Label></Form.Label>
               <Form.Control type="number" placeholder="Price" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="">
+            <Form.Group className="mb-3" controlId="details">
               <Form.Label></Form.Label>
               <Form.Control type="text" placeholder="Details" />
             </Form.Group>
 
-            <Form.Group class="mb-3">
-              <Form.Label for="formFileMultiple" className="form-label">
-                Images files
-              </Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label className="form-label">Images files</Form.Label>
               <Form.Control
                 className="form-control"
                 type="file"

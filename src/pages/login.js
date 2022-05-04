@@ -5,7 +5,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-//import AuthContext from "../../auth/AuthContex"; useContext
+import { useNavigate } from "react-router-dom";
+
+const url = "https://holidaze-api-strapi.herokuapp.com/api/auth/local";
 
 const schema = yup.object().shape({
   username: yup.string().required("Please enter your username"),
@@ -16,6 +18,8 @@ export default function Login() {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
+  let navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -24,20 +28,28 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  //const [auth, setAuth] = useContext(AuthContext);
-
-  async function onSubmit(data) {
+  async function onSubmit(input) {
     setSubmitting(true);
     setLoginError(null);
 
-    console.log(data);
+    console.log(input);
 
     try {
-      const response = await axios.post(data);
-      console.log(response.data);
-      //setAuth(response.data);
+      const { data } = await axios.post(url, {
+        identifier: input.username,
+        password: input.password,
+      });
 
-      //router.push("/admin");
+      console.log(data);
+
+      if (data.user) {
+        //Save token and user name and rediret to /admin
+        navigate("/admin");
+      }
+
+      if (data.error) {
+        //display error message
+      }
     } catch (error) {
       console.log(error);
       setLoginError(error.toString());
@@ -56,7 +68,11 @@ export default function Login() {
           <fieldset disabled={submitting}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Username</Form.Label>
-              <Form.Control placeholder="Username" {...register("username")} />
+              <Form.Control
+                placeholder="Username"
+                type="text"
+                {...register("username")}
+              />
               {errors.username && (
                 <Form.Text className="error">
                   {errors.username.message}
@@ -87,3 +103,49 @@ export default function Login() {
     </Layout>
   );
 }
+
+/*
+
+async function adminUser(username, password) {
+  const userData = JSON.stringify({
+    identifier: username,
+    password: password,
+  });
+
+  try {
+    const response = await fetch(url, options);
+    const json = await response.json();
+    console.log(json);
+
+    if (json.user) {
+      saveToken(json.jwt);
+      saveUser(json.user);
+
+      location.href = "/admin.html";
+    }
+    if (json.error) {
+      return displayMessage(
+        "form-error",
+        "Invalid username/password",
+        ".log-ing-container"
+      );
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+*/
+
+/* 
+Login page
+
+contact - display success message
+
+booking - date picker, display success message
+
+admin- msg, booking, add display success
+
+nav - login to logout if token exist
+
+search bar - filter & display
+*/
