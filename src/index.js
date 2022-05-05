@@ -10,22 +10,25 @@ import Detail from "./pages/Detail";
 import Hotels from "./pages/Hotels";
 import Login from "../src/pages/Login";
 import Home from "../src/pages/Home";
+import { AuthProvider } from "./auth/AuthContex";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/hotels" element={<Hotels />}></Route>
-        <Route path="/detail/:id" element={<Detail />}></Route>
-        <Route path="/booking" element={<Booking />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  <AuthProvider>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/hotels" element={<Hotels />}></Route>
+          <Route path="/detail/:id" element={<Detail />}></Route>
+          <Route path="/booking" element={<Booking />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/admin" element={<Admin />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
+  </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

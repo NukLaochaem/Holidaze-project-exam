@@ -6,8 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../components/settings/api";
 
-const url = "https://holidaze-api-strapi.herokuapp.com/api/auth/local";
+const LoginUrl = baseUrl + "api/auth/local";
 
 const schema = yup.object().shape({
   username: yup.string().required("Please enter your username"),
@@ -35,7 +36,7 @@ export default function Login() {
     console.log(input);
 
     try {
-      const { data } = await axios.post(url, {
+      const { data } = await axios.post(LoginUrl, {
         identifier: input.username,
         password: input.password,
       });

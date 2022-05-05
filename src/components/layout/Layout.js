@@ -1,11 +1,22 @@
 import { Nav, Container, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../auth/AuthContex";
 
 function Layout({ children }) {
+  const [auth, setAuth] = useContext(AuthContext);
+  let navigate = useNavigate();
+
   let activeStyle = {
     textDecoration: "underline 3px black solid",
     textUnderlineOffset: "3px",
   };
+
+  function logout() {
+    setAuth(null);
+    navigate("/admin");
+  }
 
   return (
     <>
@@ -41,6 +52,26 @@ function Layout({ children }) {
               >
                 Login
               </NavLink>
+
+              {auth ? (
+                <>
+                  <NavLink
+                    to="/admin"
+                    style={({ isActive }) =>
+                      isActive ? activeStyle : undefined
+                    }
+                  >
+                    admin
+                  </NavLink>
+                </>
+              ) : (
+                <NavLink
+                  to="/login"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Login
+                </NavLink>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
