@@ -1,11 +1,26 @@
 import Layout from "../components/layout/Layout";
 import { Container, Table, Accordion, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../auth/AuthContex";
 
 export default function Admin() {
+  const [auth, setAuth] = useContext(AuthContext);
+  let navigate = useNavigate();
+
+  function logout() {
+    setAuth(null);
+    navigate("/login");
+  }
   return (
     <Layout>
       <Container>
-        <h1>Admin page</h1>
+        <div className="d-flex align-items-center justify-content-between">
+          <h1>Admin page</h1>
+          <button onClick={logout} className="logout-btn">
+            Logout
+          </button>
+        </div>
 
         <Container className="booking-container bg-white p-5 my-5">
           <h2>Booking</h2>

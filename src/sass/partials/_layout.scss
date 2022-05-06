@@ -16,10 +16,15 @@ nav{
   } & :hover{
     color: $primary;
   }
-
   .navbar-collapse{
     background-color: white;
     margin-top: 0.6rem;
+  }
+  .admin-nav{
+    color: $primary;
+    &:hover{
+      color: black;
+    }
   }
   @media (min-width: 990px){
     .navbar-collapse{

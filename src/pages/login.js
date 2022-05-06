@@ -1,12 +1,13 @@
 import Layout from "../components/layout/Layout";
 import { Form, Button, Container } from "react-bootstrap";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../components/settings/api";
+import AuthContext from "../auth/AuthContex";
 
 const LoginUrl = baseUrl + "api/auth/local";
 
@@ -29,6 +30,9 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
+  // eslint-disable-next-line no-unused-vars
+  const [auth, setAuth] = useContext(AuthContext);
+
   async function onSubmit(input) {
     setSubmitting(true);
     setLoginError(null);
@@ -45,6 +49,7 @@ export default function Login() {
 
       if (data.user) {
         //Save token and user name and rediret to /admin
+        setAuth(data);
         navigate("/admin");
       }
 
@@ -105,42 +110,12 @@ export default function Login() {
   );
 }
 
-/*
-
-async function adminUser(username, password) {
-  const userData = JSON.stringify({
-    identifier: username,
-    password: password,
-  });
-
-  try {
-    const response = await fetch(url, options);
-    const json = await response.json();
-    console.log(json);
-
-    if (json.user) {
-      saveToken(json.jwt);
-      saveUser(json.user);
-
-      location.href = "/admin.html";
-    }
-    if (json.error) {
-      return displayMessage(
-        "form-error",
-        "Invalid username/password",
-        ".log-ing-container"
-      );
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-*/
-
 /* 
-Login page
+Login page----
 
 contact - display success message
+
+hotels - contents
 
 booking - date picker, display success message
 

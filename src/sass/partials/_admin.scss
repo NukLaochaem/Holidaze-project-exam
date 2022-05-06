@@ -1,0 +1,10 @@
+.logout-btn{
+  border: none;
+  color: $primary;
+  background-color: $bg-color;
+  font-size: 1.3rem;
+  font-weight: 500;
+  &:hover{
+    color: black;
+  }
+}

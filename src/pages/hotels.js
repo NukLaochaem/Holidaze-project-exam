@@ -1,6 +1,9 @@
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
+//import baseUrl from "../components/settings/api";
+
+//const hotelsUrl = baseUrl + "api/hotels/?publicationState=preview";
 
 export default function Hotels() {
   return (

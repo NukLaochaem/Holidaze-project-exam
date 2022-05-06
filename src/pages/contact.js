@@ -3,25 +3,27 @@ import { Form, Button, Container, Accordion } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-//import axios from "axios";
+import axios from "axios";
+import { baseUrl } from "../components/settings/api";
 
 const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Please enter your first name")
-    .min(3, "Your first name must be at least 3 characters"),
-
   email: yup
     .string()
     .required("Please enter an email address")
     .email("Please enter a valid email address"),
+
+  subject: yup
+    .string()
+    .required("The subject field is reqiored")
+    .min(5, "Subject must be at least 5 characters"),
 
   message: yup
     .string()
     .required("Please enter your message")
     .min(10, "The message must be at least 10 characters"),
 });
+
+const contactUrl = baseUrl + "api/contacts";
 
 export default function Contact() {
   const {
@@ -36,15 +38,29 @@ export default function Contact() {
   async function onSubmit(data) {
     console.log(data);
 
-    /*try {
-      const response = await axios.post(data);
-      console.log(response.data);
+    try {
+      const { data } = await axios.post(
+        contactUrl,
+        {
+          data: {
+            email: data.email,
+            subject: data.subject,
+            message: data.message,
+          },
+        },
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc2OTM4MTUwLCJleHAiOjE1Nzk1MzAxNTB9.UgsjjXkAZ-anD257BF7y1hbjuY3ogNceKfTAQtzDEsU",
+          },
+        }
+      );
     } catch (error) {
       console.log(error);
       //setLoginError(error.toString());
     } finally {
       //setSubmitting(false);
-    }*/
+    }
   }
   return (
     <Layout>
@@ -104,19 +120,21 @@ export default function Contact() {
 
         <Container className="form-container py-1 px-4 my-5">
           <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Your Name</Form.Label>
-              <Form.Control placeholder="First name" {...register("name")} />
-              {errors.name && (
-                <Form.Text className="error">{errors.name.message}</Form.Text>
-              )}
-            </Form.Group>
-
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email address</Form.Label>
               <Form.Control placeholder="Enter email" {...register("email")} />
               {errors.email && (
                 <Form.Text className="error">{errors.email.message}</Form.Text>
+              )}
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="subject">
+              <Form.Label>Subject</Form.Label>
+              <Form.Control placeholder="Subject" {...register("subject")} />
+              {errors.subject && (
+                <Form.Text className="error">
+                  {errors.subject.message}
+                </Form.Text>
               )}
             </Form.Group>
 
