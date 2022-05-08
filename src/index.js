@@ -4,7 +4,6 @@ import reportWebVitals from "./reportWebVitals";
 import "./sass/style.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "../src/pages/Admin";
-import Booking from "../src/pages/Booking";
 import Contact from "../src/pages/Contact";
 import Detail from "./pages/Detail";
 import Hotels from "./pages/Hotels";
@@ -21,7 +20,6 @@ root.render(
           <Route path="/" element={<Home />}></Route>
           <Route path="/hotels" element={<Hotels />}></Route>
           <Route path="/detail/:id" element={<Detail />}></Route>
-          <Route path="/booking" element={<Booking />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/admin" element={<Admin />}></Route>

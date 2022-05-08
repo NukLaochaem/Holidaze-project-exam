@@ -17,6 +17,9 @@ a{
   text-decoration: underline 1px black solid;
   text-underline-offset: 3px;
 }
+.upperCase:first-letter{
+  text-transform: uppercase;
+}
 
 @mixin buttonColorPrimary {
   color: $primary;
@@ -40,6 +43,8 @@ a{
     box-shadow: none !important;
   }
 }
+
+
 
 @mixin buttonColorSecondary{
   color: white;

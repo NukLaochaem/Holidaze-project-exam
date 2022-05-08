@@ -3,8 +3,12 @@ import { Form, Button, Container, Accordion } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+//import useAxios from "../hooks/useAxios";
+import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../components/settings/api";
+
+const contactUrl = baseUrl + "api/contacts";
 
 const schema = yup.object().shape({
   email: yup
@@ -23,12 +27,16 @@ const schema = yup.object().shape({
     .min(10, "The message must be at least 10 characters"),
 });
 
-const contactUrl = baseUrl + "api/contacts";
-
 export default function Contact() {
+  const [submitting, setSubmitting] = useState(false);
+  const [loginError, setLoginError] = useState(null);
+  //const [loginSuccess, setLoginSuccess] = useState(null);
+  //const http = useAxios();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -39,27 +47,21 @@ export default function Contact() {
     console.log(data);
 
     try {
-      const { data } = await axios.post(
-        contactUrl,
-        {
-          data: {
-            email: data.email,
-            subject: data.subject,
-            message: data.message,
-          },
+      const response = await axios.post(contactUrl, {
+        data: {
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
         },
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc2OTM4MTUwLCJleHAiOjE1Nzk1MzAxNTB9.UgsjjXkAZ-anD257BF7y1hbjuY3ogNceKfTAQtzDEsU",
-          },
-        }
-      );
+      });
+      console.log(response);
+      setLoginError("Your message has been sent");
+      reset(response);
     } catch (error) {
       console.log(error);
-      //setLoginError(error.toString());
+      setLoginError(error.toString());
     } finally {
-      //setSubmitting(false);
+      setSubmitting(false);
     }
   }
   return (
@@ -120,36 +122,45 @@ export default function Contact() {
 
         <Container className="form-container py-1 px-4 my-5">
           <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control placeholder="Enter email" {...register("email")} />
-              {errors.email && (
-                <Form.Text className="error">{errors.email.message}</Form.Text>
-              )}
-            </Form.Group>
+            {loginError && <h5 className="error">{loginError} </h5>}
 
-            <Form.Group className="mb-3" controlId="subject">
-              <Form.Label>Subject</Form.Label>
-              <Form.Control placeholder="Subject" {...register("subject")} />
-              {errors.subject && (
-                <Form.Text className="error">
-                  {errors.subject.message}
-                </Form.Text>
-              )}
-            </Form.Group>
+            <fieldset disabled={submitting}>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  placeholder="Enter email"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <Form.Text className="error">
+                    {errors.email.message}
+                  </Form.Text>
+                )}
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="message">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" rows={4} {...register("message")} />
-              {errors.message && (
-                <Form.Text className="error">
-                  {errors.message.message}
-                </Form.Text>
-              )}
-            </Form.Group>
-            <Button type="submit" className="contact-btn mt-2 btn-lg">
-              Submit
-            </Button>
+              <Form.Group className="mb-3" controlId="subject">
+                <Form.Label>Subject</Form.Label>
+                <Form.Control placeholder="Subject" {...register("subject")} />
+                {errors.subject && (
+                  <Form.Text className="error">
+                    {errors.subject.message}
+                  </Form.Text>
+                )}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="message">
+                <Form.Label>Message</Form.Label>
+                <Form.Control as="textarea" rows={4} {...register("message")} />
+                {errors.message && (
+                  <Form.Text className="error">
+                    {errors.message.message}
+                  </Form.Text>
+                )}
+              </Form.Group>
+              <Button type="submit" className="contact-btn mt-2 btn-lg">
+                Submit
+              </Button>
+            </fieldset>
           </Form>
         </Container>
       </div>

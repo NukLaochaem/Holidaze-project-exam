@@ -1,17 +1,23 @@
 import Layout from "../components/layout/Layout";
-import { Container, Table, Accordion, Form, Button } from "react-bootstrap";
+import { Container, Table, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../auth/AuthContex";
 
+import GetContact from "../components/admin/GetContact";
+
 export default function Admin() {
-  const [auth, setAuth] = useContext(AuthContext);
+  const [, setAuth] = useContext(AuthContext);
+
   let navigate = useNavigate();
+
+  //if (data.user) {navigate("/login");}      check for token
 
   function logout() {
     setAuth(null);
     navigate("/login");
   }
+
   return (
     <Layout>
       <Container>
@@ -56,37 +62,7 @@ export default function Admin() {
           </Table>
         </Container>
 
-        <Container className="message-container bg-white p-5">
-          <div className="message-admin">
-            <h2>Messages</h2>
-            <Accordion defaultActiveKey={["0"]} alwaysOpen>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Subject</Accordion.Header>
-                <Accordion.Body>
-                  <p>
-                    <span className="me-2">From</span>
-                    Kjell
-                  </p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  in culpa qui officia deserunt mollit anim id est laborum.
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>Subject</Accordion.Header>
-                <Accordion.Body>
-                  <p>
-                    <span className="me-2">From</span>
-                    Kim
-                  </p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-          </div>
-        </Container>
+        <GetContact></GetContact>
 
         <Container className="add-container bg-white my-5 p-5">
           <Form className="">

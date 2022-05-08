@@ -30,8 +30,7 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  // eslint-disable-next-line no-unused-vars
-  const [auth, setAuth] = useContext(AuthContext);
+  const [, setAuth] = useContext(AuthContext);
 
   async function onSubmit(input) {
     setSubmitting(true);
@@ -44,11 +43,9 @@ export default function Login() {
         identifier: input.username,
         password: input.password,
       });
-
       console.log(data);
 
       if (data.user) {
-        //Save token and user name and rediret to /admin
         setAuth(data);
         navigate("/admin");
       }
@@ -59,6 +56,7 @@ export default function Login() {
     } catch (error) {
       console.log(error);
       setLoginError(error.toString());
+      //display error message
     } finally {
       setSubmitting(false);
     }
