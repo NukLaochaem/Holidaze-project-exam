@@ -25,6 +25,21 @@
     height: 200px;
     padding: 0px;
   }
+  .hotles-name{
+    font-size: 1.3rem;
+  }
+  .hotels-location{
+    font-size: 1rem
+  }
+  .hotels-description{
+    font-size: 1rem;
+  }
+  .hotels-info{
+    font-size: 0.7;
+  }
+  .hotels-price{
+    font-size: 1rem
+  }
   button{
     @include buttonColorSecondary;
   }

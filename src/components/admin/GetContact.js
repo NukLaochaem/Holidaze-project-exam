@@ -1,16 +1,18 @@
 import { Container, Accordion } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import useAxios from "../../hooks/useAxios";
+import { baseUrl } from "../settings/api";
+import axios from "axios";
+
+const contactUrl = baseUrl + "api/contacts";
 
 export default function GetContact() {
   const [contact, setContact] = useState([]);
-  const http = useAxios();
 
   useEffect(function () {
     async function contactAdmin() {
       try {
-        const responseContact = await http.get("api/contacts");
-        setContact(responseContact.data.data);
+        const response = await axios.get(contactUrl);
+        setContact(response.data.data);
       } catch (error) {
         console.log(error);
       }
