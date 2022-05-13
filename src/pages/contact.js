@@ -3,7 +3,6 @@ import { Form, Button, Container, Accordion } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-//import useAxios from "../hooks/useAxios";
 import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../components/settings/api";
@@ -30,8 +29,7 @@ const schema = yup.object().shape({
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
-  //const [loginSuccess, setLoginSuccess] = useState(null);
-  //const http = useAxios();
+  const [loginSuccess, setLoginSuccess] = useState(null);
 
   const {
     register,
@@ -55,7 +53,8 @@ export default function Contact() {
         },
       });
       console.log(response);
-      setLoginError("Your message has been sent");
+      setLoginError(null);
+      setLoginSuccess("Your message has been sent.");
       reset(response);
     } catch (error) {
       console.log(error);
@@ -122,7 +121,10 @@ export default function Contact() {
 
         <Container className="form-container py-1 px-4 my-5">
           <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
-            {loginError && <h5 className="error">{loginError} </h5>}
+            {loginError && <h5 className="error text-center">{loginError} </h5>}
+            {loginSuccess && (
+              <h5 className="success text-center">{loginSuccess} </h5>
+            )}
 
             <fieldset disabled={submitting}>
               <Form.Group className="mb-3" controlId="email">

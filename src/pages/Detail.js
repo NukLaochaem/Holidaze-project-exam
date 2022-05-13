@@ -1,11 +1,14 @@
 import Layout from "../components/layout/Layout";
 import { Container, Carousel, Button, Modal, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RangeDatePicker } from "react-google-flight-datepicker";
 import "react-google-flight-datepicker/dist/main.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { baseUrl } from "../components/settings/api";
 
 const schema = yup.object().shape({
   name: yup
@@ -20,6 +23,20 @@ const schema = yup.object().shape({
 });
 
 export default function HotelDetails() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [detail, setDetail] = useState(null);
+
+  const { id } = useParams();
+
+  const detailUrl = baseUrl + "api/hotels/" + id;
+  let navigate = useNavigate();
+
+  if (!id) {
+    navigate("/");
+  }
+
   const {
     register,
     handleSubmit,
@@ -29,14 +46,25 @@ export default function HotelDetails() {
     resolver: yupResolver(schema),
   });
 
-  const [show, setShow] = useState(false);
+  useEffect(
+    function () {
+      async function fetchData() {
+        try {
+          const response = await axios.get(detailUrl);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+          console.log(response);
 
-  async function booking(data) {
-    console.log(data);
-  }
+          const hotel = response.data.data;
+          console.log(hotel);
+          setDetail(hotel);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchData();
+    },
+    [detailUrl]
+  );
 
   return (
     <Layout>
@@ -82,7 +110,7 @@ export default function HotelDetails() {
         </Carousel>
 
         <div className="detail-container mb-5">
-          <h1 className="">Hotel name</h1>
+          <h1 className="">{detail.attributes.name}</h1>
           <h5 className="">1200 Nok / Night</h5>
           <p className="">Location bergen, near fish market etc.</p>
           <h4 className="">Facilities</h4>
@@ -108,7 +136,7 @@ export default function HotelDetails() {
 
         <div className="modal-container">
           <Modal show={show} onHide={handleClose}>
-            <Form onSubmit={handleSubmit(booking)} className="modal-container">
+            <Form onSubmit={handleSubmit()} className="modal-container">
               <Modal.Header closeButton>
                 <Modal.Title>Your Booking</Modal.Title>
               </Modal.Header>

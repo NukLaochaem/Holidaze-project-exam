@@ -36,7 +36,7 @@ export default function Hotels() {
           return (
             <div className="hotels-container my-5" key={hotel.id}>
               <div className="hotel-img-container">
-                <Link to="/detail/:id">
+                <Link to={`/detail/${hotel.id}`}>
                   <img src="" className="hotel-img" alt="hotel" />
                 </Link>
               </div>
@@ -50,7 +50,7 @@ export default function Hotels() {
                   <h3 className="hotels-price text-right">
                     Nok {hotel.attributes.price} / Night
                   </h3>
-                  <Link to="/detail/:id">
+                  <Link to={`/detail/${hotel.id}`}>
                     <button className="btn">Book Now</button>
                   </Link>
                 </div>

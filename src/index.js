@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import "./sass/style.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Admin from "../src/pages/Admin";
-import Contact from "../src/pages/Contact";
+import Admin from "./pages/Admin";
+import Contact from "./pages/Contact";
 import Detail from "./pages/Detail";
 import Hotels from "./pages/Hotels";
-import Login from "../src/pages/Login";
-import Home from "../src/pages/Home";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
 import { AuthProvider } from "./auth/AuthContex";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
