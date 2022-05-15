@@ -27,6 +27,7 @@ export default function HotelDetails() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -46,25 +47,29 @@ export default function HotelDetails() {
     resolver: yupResolver(schema),
   });
 
-  useEffect(
-    function () {
-      async function fetchData() {
-        try {
-          const response = await axios.get(detailUrl);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(detailUrl);
 
-          console.log(response);
+        console.log(response);
 
-          const hotel = response.data.data;
-          console.log(hotel);
-          setDetail(hotel);
-        } catch (error) {
-          console.log(error);
-        }
+        const hotel = response.data.data;
+        console.log(hotel);
+        setDetail(hotel);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      fetchData();
-    },
-    [detailUrl]
-  );
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Layout>
@@ -111,8 +116,11 @@ export default function HotelDetails() {
 
         <div className="detail-container mb-5">
           <h1 className="">{detail.attributes.name}</h1>
-          <h5 className="">1200 Nok / Night</h5>
-          <p className="">Location bergen, near fish market etc.</p>
+
+          <p className="">
+            <i class="fa-solid fa-location-dot"></i>
+            {detail.attributes.location} Bergen habour
+          </p>
           <h4 className="">Facilities</h4>
           <p className="my-4">
             <i className="fa-solid fa-bed fa-lg mx-5"></i>
@@ -121,14 +129,8 @@ export default function HotelDetails() {
             <i className="fa-solid fa-ban-smoking fa-lg mx-5"></i>
           </p>
           <h4 className="">Description</h4>
-          <p className="">
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi sint occaecati cupiditate non
-            provident, similique sunt in culpa qui officia deserunt mollitia
-            animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
-            est et expedita distinctio.
-          </p>
+          <p className="">{detail.attributes.description}</p>
+          <h5 className="">{detail.attributes.price} Nok / Night</h5>
           <Button className="btn-lg" onClick={handleShow}>
             Book Now
           </Button>

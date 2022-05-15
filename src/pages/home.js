@@ -18,6 +18,10 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="tour my-5">
+        <h2 className="tour-text">Fjordcruise Tour From Bergen</h2>
+      </div>
+
       <div className="container my-5">
         <div className="row justify-content-center gap-5">
           <div className="home-card-container col-12 col-md-5 text-center ">
@@ -40,10 +44,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="tour my-5">
-        <h2 className="tour-text">Fjordcruise Tour From Bergen</h2>
       </div>
     </Layout>
   );

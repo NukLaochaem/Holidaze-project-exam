@@ -5,16 +5,19 @@ import { baseUrl } from "../components/settings/api";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const hotelsUrl = baseUrl + "api/hotels/?publicationState=preview";
+const hotelsUrl = baseUrl + "api/hotels?populate=*";
 
 export default function Hotels() {
   const [hotels, setHotels] = useState([]);
+  //const [loading, setLoading] = useState(true);
 
-  useEffect(function () {
+  useEffect(() => {
     async function getData() {
       try {
         const response = await axios.get(hotelsUrl);
+
         console.log(response.data.data);
+
         setHotels(response.data.data);
       } catch (error) {
         console.log(error);
@@ -37,15 +40,26 @@ export default function Hotels() {
             <div className="hotels-container my-5" key={hotel.id}>
               <div className="hotel-img-container">
                 <Link to={`/detail/${hotel.id}`}>
-                  <img src="" className="hotel-img" alt="hotel" />
+                  {hotel.attributes.image.data.map(function (img) {
+                    return (
+                      <img
+                        key={img.id}
+                        src={img.attributes.formats.thumbnail.url}
+                        className="hotel-img"
+                        alt="hotel"
+                      />
+                    );
+                  })}
                 </Link>
               </div>
 
               <div className="hotels-card-container p-3">
                 <h2 className="hotles-name">{hotel.attributes.name}</h2>
-                <p className="hotels-location">{hotel.attributes.location}</p>
-                <h4 className="hotels-description">Description</h4>
-                <p className="hotels-info">{hotel.attributes.description}</p>
+                <p className="hotels-info mt-3">
+                  <i className="fa-solid fa-location-dot me-1"></i>
+                  {hotel.attributes.location}
+                </p>
+
                 <div className="d-flex justify-content-between align-items-center">
                   <h3 className="hotels-price text-right">
                     Nok {hotel.attributes.price} / Night
