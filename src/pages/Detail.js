@@ -117,9 +117,9 @@ export default function HotelDetails() {
         <div className="detail-container mb-5">
           <h1 className="">{detail.attributes.name}</h1>
 
-          <p className="">
-            <i class="fa-solid fa-location-dot"></i>
-            {detail.attributes.location} Bergen habour
+          <p>
+            <i class="fa-solid fa-location-dot me-2"></i>
+            {detail.attributes.location}
           </p>
           <h4 className="">Facilities</h4>
           <p className="my-4">

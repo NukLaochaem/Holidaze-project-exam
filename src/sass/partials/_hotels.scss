@@ -22,8 +22,11 @@
 
   .hotel-img-container{
     background-color: #cccccc;
-    height: 200px;
     padding: 0px;
+  }
+  .hotel-img{
+    height: auto;
+    width: 100%;
   }
   .hotles-name{
     font-size: 1.3rem;
@@ -52,7 +55,7 @@
   }
   .hotel-img-container{
     width: 30%;
-    flex-grow: "";
+
   }
   .hotels-card-container{
     width: 70%;

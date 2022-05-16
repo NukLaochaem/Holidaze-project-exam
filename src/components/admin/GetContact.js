@@ -12,6 +12,7 @@ export default function GetContact() {
     async function contactAdmin() {
       try {
         const response = await axios.get(contactUrl);
+
         setContact(response.data.data);
       } catch (error) {
         console.log(error);

@@ -44,7 +44,7 @@ export default function Hotels() {
                     return (
                       <img
                         key={img.id}
-                        src={img.attributes.formats.thumbnail.url}
+                        src={img.attributes.formats.small.url}
                         className="hotel-img"
                         alt="hotel"
                       />
@@ -53,7 +53,7 @@ export default function Hotels() {
                 </Link>
               </div>
 
-              <div className="hotels-card-container p-3">
+              <div className="hotels-card-container p-2">
                 <h2 className="hotles-name">{hotel.attributes.name}</h2>
                 <p className="hotels-info mt-3">
                   <i className="fa-solid fa-location-dot me-1"></i>
