@@ -1,5 +1,12 @@
 import Layout from "../components/layout/Layout";
-import { Container, Carousel, Button, Modal, Form } from "react-bootstrap";
+import {
+  Container,
+  Carousel,
+  Button,
+  Modal,
+  Form,
+  Spinner,
+} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { RangeDatePicker } from "react-google-flight-datepicker";
 import "react-google-flight-datepicker/dist/main.css";
@@ -20,6 +27,17 @@ const schema = yup.object().shape({
     .string()
     .required("Please enter an email address")
     .email("Please enter a valid email address"),
+
+  checkin: yup
+    .date()
+    .nullable()
+    .transform((curr, orig) => (orig === "" ? null : curr))
+    .required("Please select a date"),
+  checkout: yup
+    .date()
+    .nullable()
+    .transform((curr, orig) => (orig === "" ? null : curr))
+    .required("Please select a date"),
 });
 
 export default function HotelDetails() {
@@ -29,15 +47,17 @@ export default function HotelDetails() {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams();
+  const [success, setSuccess] = useState(null);
+  const [loginError, setLoginError] = useState(null);
 
+  const { id } = useParams();
   const detailUrl = baseUrl + "api/hotels/" + id;
+  const bookingUrl = baseUrl + "api/booking";
   let navigate = useNavigate();
 
   if (!id) {
     navigate("/");
   }
-
   const {
     register,
     handleSubmit,
@@ -51,11 +71,7 @@ export default function HotelDetails() {
     async function fetchData() {
       try {
         const response = await axios.get(detailUrl);
-
-        console.log(response);
-
         const hotel = response.data.data;
-        console.log(hotel);
         setDetail(hotel);
       } catch (error) {
         console.log(error);
@@ -67,8 +83,36 @@ export default function HotelDetails() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  async function onSubmit(input) {
+    console.log(input);
+
+    try {
+      const response = await axios.post(bookingUrl, {
+        data: {
+          hotel: detail.attributes.name,
+          name: input.name,
+          email: input.email,
+          price: detail.attributes.price,
+          checkin: input.checkin,
+          checkout: input.checkout,
+        },
+      });
+      console.log(response);
+      //setSuccess("Thank you for your booking confirmation");
+    } catch (error) {
+      console.log(error);
+      setLoginError(error.toString());
+    } finally {
+      console.log("finally");
+    }
+  }
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Spinner animation="grow" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
   }
 
   return (
@@ -118,7 +162,7 @@ export default function HotelDetails() {
           <h1 className="">{detail.attributes.name}</h1>
 
           <p>
-            <i class="fa-solid fa-location-dot me-2"></i>
+            <i className="fa-solid fa-location-dot me-2"></i>
             {detail.attributes.location}
           </p>
           <h4 className="">Facilities</h4>
@@ -138,17 +182,15 @@ export default function HotelDetails() {
 
         <div className="modal-container">
           <Modal show={show} onHide={handleClose}>
-            <Form onSubmit={handleSubmit()} className="modal-container">
+            <Form onSubmit={handleSubmit(onSubmit)} className="modal-container">
               <Modal.Header closeButton>
                 <Modal.Title>Your Booking</Modal.Title>
               </Modal.Header>
 
               <Modal.Body>
-                <div className="alert success-alert">
-                  <h5>Success Alert Message</h5>
-                </div>
+                {success && <h5 className="success">{success}</h5>}
 
-                <h4>Hotel name</h4>
+                <h4>{detail.attributes.name}</h4>
 
                 <Form.Group className="mb-3" controlId="name">
                   <Form.Label>Your Name</Form.Label>
@@ -176,17 +218,24 @@ export default function HotelDetails() {
                   )}
                 </Form.Group>
 
-                <p>Check in / Check out</p>
-                <RangeDatePicker
-                  startDate={new Date()}
-                  endDate={new Date()}
-                  dateFormat="DD MMM YYYY"
-                  monthFormat="DD MMM YYYY"
-                  className="date-picker"
-                />
+                <Form.Group className="mb-3" controlId="date">
+                  <Form.Label>Check in / Check out</Form.Label>
+                  <Form.Control type="date" {...register("checkin")} />
+                  {errors.checkin && (
+                    <Form.Text className="error">
+                      {errors.checkin.message}
+                    </Form.Text>
+                  )}
+                  <Form.Control type="date" {...register("checkout")} />
+                  {errors.checkout && (
+                    <Form.Text className="error">
+                      {errors.checkout.message}
+                    </Form.Text>
+                  )}
+                </Form.Group>
               </Modal.Body>
               <Modal.Footer>
-                <h5>Total: 1300</h5>
+                <h5>{detail.attributes.price} Nok / night</h5>
                 <Button className="btn-lg btn-modal" type="submit">
                   Book
                 </Button>

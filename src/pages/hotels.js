@@ -15,9 +15,7 @@ export default function Hotels() {
     async function getData() {
       try {
         const response = await axios.get(hotelsUrl);
-
         console.log(response.data.data);
-
         setHotels(response.data.data);
       } catch (error) {
         console.log(error);

@@ -35,12 +35,11 @@ export default function Login() {
   async function onSubmit(input) {
     setSubmitting(true);
     setLoginError(null);
-
     console.log(input);
 
     try {
       const { data } = await axios.post(LoginUrl, {
-        identifier: input.username,
+        username: input.username,
         password: input.password,
       });
       console.log(data);
