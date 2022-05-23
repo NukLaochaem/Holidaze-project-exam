@@ -6,20 +6,21 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { getToken } from "./getToken";
 
 const AddHotelUrl = baseUrl + "api/hotels";
 
 const schema = yup.object().shape({
-  username: yup.string().required("Please enter your username"),
-  location: yup.string().required("Please enter your username"),
-  price: yup.string().required("Please enter your password"),
-  detail: yup.string().required("Please enter your password"),
-  image: yup.string().required("Please enter your password"),
+  hotelname: yup.string().required("Enter hotel name"),
+  location: yup.string().required("Enter hotel location"),
+  price: yup.string().required("Enter hotel price"),
+  detail: yup.string().required("Enter Hotel detail"),
+  image: yup.object().required("Image required"),
 });
 
 export default function AddHotel(input) {
   const [submitting, setSubmitting] = useState(false);
-  const [loginError, setLoginError] = useState(null);
+  const [formError, setformError] = useState(null);
 
   const {
     register,
@@ -30,15 +31,25 @@ export default function AddHotel(input) {
   });
 
   async function onSubmit() {
+    const authToken = getToken();
+    const token = authToken.jwt;
+
     try {
-      const { data } = await axios.post(AddHotelUrl, {
-        name: input.name,
-        location: input.location,
-        price: input.price,
-        detail: input.detail,
-        image: "",
-      });
-      console.log(data);
+      const { data } = axios.post(
+        AddHotelUrl,
+        {
+          name: input.name,
+          location: input.location,
+          price: input.price,
+          detail: input.detail,
+          image: input.image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -48,16 +59,20 @@ export default function AddHotel(input) {
   return (
     <Container className="add-container bg-white my-5 p-5">
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Add now hotels</h2>
+        <h2 className="mb-3">Add new hotel</h2>
 
         <fieldset disabled={submitting}>
           <Form.Group className="mb-3">
-            <Form.Label></Form.Label>
             <Form.Control
-              type="email"
+              type="text"
               placeholder="Hotel name"
               {...register("hotelname")}
             />
+            {errors.hotelname && (
+              <Form.Text className="error">
+                {errors.hotelname.message}
+              </Form.Text>
+            )}
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
 
@@ -66,13 +81,17 @@ export default function AddHotel(input) {
             controlId="location"
             {...register("location")}
           >
-            <Form.Label></Form.Label>
             <Form.Control type="text" placeholder="Location" />
+            {errors.location && (
+              <Form.Text className="error">{errors.location.message}</Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="price" {...register("price")}>
-            <Form.Label></Form.Label>
             <Form.Control type="number" placeholder="Price" />
+            {errors.price && (
+              <Form.Text className="error">{errors.price.message}</Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group
@@ -80,18 +99,22 @@ export default function AddHotel(input) {
             controlId="details"
             {...register("detail")}
           >
-            <Form.Label></Form.Label>
             <Form.Control type="text" placeholder="Details" />
+            {errors.detail && (
+              <Form.Text className="error">{errors.detail.message}</Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group className="mb-3" {...register("image")}>
-            <Form.Label className="form-label">Images files</Form.Label>
             <Form.Control
               className="form-control"
               type="file"
               id="formFileMultiple"
               multiple
             />
+            {errors.image && (
+              <Form.Text className="error">{errors.image.message}</Form.Text>
+            )}
           </Form.Group>
         </fieldset>
 

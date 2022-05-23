@@ -52,7 +52,7 @@ export default function HotelDetails() {
 
   const { id } = useParams();
   const detailUrl = baseUrl + "api/hotels/" + id;
-  const bookingUrl = baseUrl + "api/booking";
+  const bookingUrl = baseUrl + "api/bookings";
   let navigate = useNavigate();
 
   if (!id) {

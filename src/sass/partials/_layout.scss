@@ -6,8 +6,13 @@ a{
 }
 
 nav{
-  background-color: $bg-color;
+  background-color: white;
   color: black;
+  
+  .nav-container{
+    max-width: 1200px;
+    margin: 0 auto !important;
+  }
   a{
     padding: 0.5rem 1rem;
     color: black;
@@ -28,9 +33,7 @@ nav{
   }
   @media (min-width: 990px){
     .navbar-collapse{
-      background-color: $bg-color;
       margin-top: 0px;
-      margin-right: 1rem;
     }
   }
 }

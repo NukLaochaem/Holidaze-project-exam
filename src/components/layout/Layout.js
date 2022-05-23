@@ -13,9 +13,9 @@ function Layout({ children }) {
 
   return (
     <>
-      <Navbar expand="lg">
-        <Container fluid>
-          <Link to="/" className="m-auto p-0 ms-lg-3">
+      <Navbar expand="lg" className="py-3">
+        <Container className="nav-container">
+          <Link to="/" className="m-auto p-0">
             <img src="/image/logo.png" alt="Holidaze-Logo" />
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

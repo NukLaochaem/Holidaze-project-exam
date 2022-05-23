@@ -39,7 +39,7 @@ export default function Login() {
 
     try {
       const { data } = await axios.post(LoginUrl, {
-        username: input.username,
+        identifier: input.username,
         password: input.password,
       });
       console.log(data);
@@ -63,7 +63,7 @@ export default function Login() {
 
   return (
     <Layout>
-      <Container className="login-container p-4">
+      <Container className="login-container p-4 my-5">
         <h1 className="login-header py-2 text-center">Admin Login page</h1>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -108,15 +108,11 @@ export default function Login() {
 }
 
 /* 
-Login page----
-
 contact - display success message
-
-hotels - contents
 
 booking - date picker, display success message
 
-admin- msg, booking, add display success
+admin- add display success 
 
 nav - login to logout if token exist
 

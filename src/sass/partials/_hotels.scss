@@ -17,48 +17,37 @@
 }
 
 .hotels-container{
-  background-color: white;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
   .hotel-img-container{
     background-color: #cccccc;
-    padding: 0px;
-  }
-  .hotel-img{
+    
+    img{
     height: auto;
     width: 100%;
+
+    }
+    &:hover{
+      transform: "";
+    }
   }
+  
   .hotles-name{
     font-size: 1.3rem;
   }
   .hotels-location{
-    font-size: 1rem
-  }
-  .hotels-description{
-    font-size: 1rem;
-  }
-  .hotels-info{
-    font-size: 0.7;
+    font-size: 0.6;
   }
   .hotels-price{
     font-size: 1.2rem
   }
-  button{
-    @include buttonColorSecondary;
-  }
 }
 
+/*
 @media (min-width: 767px){
 
-  .hotels-container{
-    display: flex;
-  }
-  .hotel-img-container{
-    width: 30%;
-
-  }
-  .hotels-card-container{
-    width: 70%;
-  }
-
+ .hotels-container{
+   width: "";
+ }
 }
+*/

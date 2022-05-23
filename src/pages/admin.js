@@ -23,7 +23,7 @@ export default function Admin() {
     <Layout>
       <Container>
         <div className="d-flex align-items-center justify-content-between">
-          <h1>Admin page</h1>
+          <h1 className="my-3">Admin page</h1>
           <button onClick={logout} className="logout-btn">
             Logout
           </button>

@@ -15,7 +15,7 @@ export default function Hotels() {
     async function getData() {
       try {
         const response = await axios.get(hotelsUrl);
-        console.log(response.data.data);
+
         setHotels(response.data.data);
       } catch (error) {
         console.log(error);
@@ -33,43 +33,41 @@ export default function Hotels() {
       </div>
 
       <Container>
-        {hotels.map((hotel) => {
-          return (
-            <div className="hotels-container my-5" key={hotel.id}>
-              <div className="hotel-img-container">
-                <Link to={`/detail/${hotel.id}`}>
-                  {hotel.attributes.image.data.map(function (img) {
-                    return (
-                      <img
-                        key={img.id}
-                        src={img.attributes.formats.small.url}
-                        className="hotel-img"
-                        alt="hotel"
-                      />
-                    );
-                  })}
-                </Link>
-              </div>
-
-              <div className="hotels-card-container p-2">
-                <h2 className="hotles-name">{hotel.attributes.name}</h2>
-                <p className="hotels-info mt-3">
-                  <i className="fa-solid fa-location-dot me-1"></i>
-                  {hotel.attributes.location}
-                </p>
-
-                <div className="d-flex justify-content-between align-items-center">
-                  <h3 className="hotels-price text-right">
-                    Nok {hotel.attributes.price} / Night
-                  </h3>
+        <div className="row my-5 ">
+          {hotels.map((hotel) => {
+            return (
+              <div
+                className="hotels-container p-0 col-md-6 col-lg-4"
+                key={hotel.id}
+              >
+                <div className="hotel-img-container">
                   <Link to={`/detail/${hotel.id}`}>
-                    <button className="btn">Book Now</button>
+                    {hotel.attributes.image.data.map(function (img) {
+                      return (
+                        <img
+                          key={img.id}
+                          src={img.attributes.formats.small.url}
+                          alt={hotel.attributes.name}
+                        />
+                      );
+                    })}
                   </Link>
                 </div>
+
+                <div className="hotels-card-container p-3">
+                  <h2 className="hotles-name">{hotel.attributes.name}</h2>
+                  <p className="hotels-location mt-3">
+                    <i className="fa-solid fa-location-dot me-2"></i>
+                    {hotel.attributes.location}
+                  </p>
+                  <h3 className="hotels-price">
+                    Nok {hotel.attributes.price} / Night
+                  </h3>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </Container>
     </Layout>
   );

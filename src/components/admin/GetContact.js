@@ -31,7 +31,7 @@ export default function GetContact() {
             return (
               <Accordion.Item eventKey={contact.id} key={contact.id}>
                 <Accordion.Header>
-                  {contact.attributes.subject}
+                  <h5>{contact.attributes.subject}</h5>
                 </Accordion.Header>
                 <Accordion.Body>
                   <p>

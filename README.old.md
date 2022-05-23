@@ -126,5 +126,5 @@ Report template included in the repo.
 
 ### Username & Password
 
-identifier: "holidaze-admin"
+username: "holidaze-admin"
 password: "pass1234"

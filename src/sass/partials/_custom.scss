@@ -8,6 +8,8 @@ body{
 }
 .wrapper {
   min-height: calc(100vh - 70px);
+  max-width: 1200px;
+  margin: 0 auto !important;
 }
 a{
   color: black;

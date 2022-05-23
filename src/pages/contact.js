@@ -28,7 +28,7 @@ const schema = yup.object().shape({
 
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
-  const [loginError, setLoginError] = useState(null);
+  const [formError, setformError] = useState(null);
   const [loginSuccess, setLoginSuccess] = useState(null);
 
   const {
@@ -53,12 +53,12 @@ export default function Contact() {
         },
       });
       console.log(response);
-      setLoginError(null);
+      setformError(null);
       setLoginSuccess("Your message has been sent.");
       reset(response);
     } catch (error) {
       console.log(error);
-      setLoginError(error.toString());
+      setformError(error.toString());
     } finally {
       setSubmitting(false);
     }
@@ -67,7 +67,7 @@ export default function Contact() {
     <Layout>
       <div className="contact-background">
         <Container>
-          <h1 className="mb-4 text-center">Contact page</h1>
+          <h1 className="my-4 text-center">Contact page</h1>
           <div className="accordion-container my-5">
             <Accordion>
               <h2 className="h5 ms-1">Frequently Asked Questions</h2>
@@ -119,9 +119,9 @@ export default function Contact() {
           </div>
         </Container>
 
-        <Container className="form-container py-1 px-4 my-5">
+        <Container className="form-container py-4 px-5 my-5">
           <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
-            {loginError && <h5 className="error text-center">{loginError} </h5>}
+            {formError && <h5 className="error text-center">{formError} </h5>}
             {loginSuccess && (
               <h5 className="success text-center">{loginSuccess} </h5>
             )}
