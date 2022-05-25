@@ -16,27 +16,38 @@
     transform: translate(-50%, 0);
   }
   form{
-    background-color: #ffffff;
+    background-color: white;
     color: black;
     width: 300px;
     height: 44px;
     border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
   }
   form input[type=text]{
     all: unset;
     color: black;
     height: 100%;
     width: 100%;
-    padding: 6px 10px;
+    padding: 0px 10px;
   }
-  form button{
-    all: unset;
-    width: 44px;
-    height: 44px;
+  .search-form-container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+
+    .search-item{  
+    margin-top: -3px;
+    margin-bottom: 3px;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    display: block;
+    }
+    .search-item:hover{
+      background-color: #cccccc;
+      color: black;
+    }
   }
+  
 
 }
 
@@ -95,3 +106,4 @@
 
   }
 }
+

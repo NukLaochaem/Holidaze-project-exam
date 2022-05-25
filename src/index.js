@@ -9,6 +9,8 @@ import Detail from "./pages/Detail";
 import Hotels from "./pages/Hotels";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import NotFoundPage from "./pages/NotFoundPage";
+import Confirmed from "./pages/Confirmed";
 import { AuthProvider } from "./auth/AuthContex";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -23,6 +25,8 @@ root.render(
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
+          <Route path="/Confirmed" element={<Confirmed />}></Route>
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

@@ -6,21 +6,26 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getToken } from "./getToken";
+import { GetToken } from "./GetToken";
 
 const AddHotelUrl = baseUrl + "api/hotels";
 
 const schema = yup.object().shape({
-  hotelname: yup.string().required("Enter hotel name"),
-  location: yup.string().required("Enter hotel location"),
-  price: yup.string().required("Enter hotel price"),
+  hotelname: yup.string().required("Enter Hotel name"),
+  location: yup.string().required("Enter Hotel location"),
+  price: yup
+    .number("Hotel price must be a number")
+    .required("Enter Hotel price"),
   detail: yup.string().required("Enter Hotel detail"),
-  image: yup.object().required("Image required"),
+  image: yup.mixed().required("image required"),
 });
 
-export default function AddHotel(input) {
+export default function AddHotel() {
   const [submitting, setSubmitting] = useState(false);
   const [formError, setformError] = useState(null);
+
+  const authToken = GetToken();
+  const token = authToken.jwt;
 
   const {
     register,
@@ -30,31 +35,39 @@ export default function AddHotel(input) {
     resolver: yupResolver(schema),
   });
 
-  async function onSubmit() {
-    const authToken = getToken();
-    const token = authToken.jwt;
+  async function onSubmit(input) {
+    const formData = new FormData();
+    const data = {
+      name: input.hotelname,
+      location: input.location,
+      price: input.price,
+      detail: input.detail,
+      image: input.image,
+    };
+
+    const file = input.image[0];
+
+    formData.append("files.image", file, file.name);
+    formData.append("data", JSON.stringify(data));
+
+    const options = {
+      method: "POST",
+      body: formData,
+    };
 
     try {
-      const { data } = axios.post(
-        AddHotelUrl,
-        {
-          name: input.name,
-          location: input.location,
-          price: input.price,
-          detail: input.detail,
-          image: input.image,
+      const response = await axios({
+        url: AddHotelUrl,
+        options,
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      });
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
   }
-  onSubmit();
 
   return (
     <Container className="add-container bg-white my-5 p-5">
@@ -73,45 +86,50 @@ export default function AddHotel(input) {
                 {errors.hotelname.message}
               </Form.Text>
             )}
-            <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
 
-          <Form.Group
-            className="mb-3"
-            controlId="location"
-            {...register("location")}
-          >
-            <Form.Control type="text" placeholder="Location" />
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Location"
+              {...register("location")}
+            />
             {errors.location && (
               <Form.Text className="error">{errors.location.message}</Form.Text>
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="price" {...register("price")}>
-            <Form.Control type="number" placeholder="Price" />
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="number"
+              placeholder="Price"
+              {...register("price")}
+            />
             {errors.price && (
               <Form.Text className="error">{errors.price.message}</Form.Text>
             )}
           </Form.Group>
 
-          <Form.Group
-            className="mb-3"
-            controlId="details"
-            {...register("detail")}
-          >
-            <Form.Control type="text" placeholder="Details" />
+          <Form.Group className="mb-3">
+            <Form.Control
+              as="textarea"
+              rows={4}
+              placeholder="Details"
+              {...register("detail")}
+            />
             {errors.detail && (
               <Form.Text className="error">{errors.detail.message}</Form.Text>
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3" {...register("image")}>
+          <Form.Group className="mb-3">
+            <Form.Label>Image file-szie should be less then 200KB</Form.Label>
             <Form.Control
               className="form-control"
               type="file"
-              id="formFileMultiple"
-              multiple
+              {...register("image")}
             />
+
             {errors.image && (
               <Form.Text className="error">{errors.image.message}</Form.Text>
             )}

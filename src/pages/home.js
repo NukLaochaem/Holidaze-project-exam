@@ -2,20 +2,69 @@ import { Button } from "react-bootstrap";
 import Layout from "../components/layout/Layout";
 import { Link } from "react-router-dom";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../components/settings/api";
+
+const hotelsUrl = baseUrl + "api/hotels";
+
 export default function Home() {
+  const [APIData, setAPIData] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await axios.get(hotelsUrl);
+        setAPIData(response.data.data);
+      } catch (error) {}
+    }
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+
+    const newFilter = APIData.filter((value) => {
+      return value.attributes.name
+        .toLowerCase()
+        .includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredResults([]);
+    } else {
+      setFilteredResults(newFilter);
+    }
+  };
+
   return (
     <Layout>
       <div className="jumbotron jumbotron-fluid home-hero-container">
         <div className="home-text-wrapper">
           <h1 className="landing-text">Welcome to Bergen?</h1>
-
-          <form className="search-form" action="">
-            <input type="text" placeholder="Search.." name="search" />
-            <button type="search">
-              <i className="fa fa-search ms-2"></i>
-            </button>
-          </form>
         </div>
+
+        <form className="search-form-container">
+          <input type="text" placeholder="Search.." onChange={handleFilter} />
+
+          {filteredResults.length !== 0 && (
+            <div>
+              {filteredResults.slice(0, 3).map((item) => {
+                return (
+                  <Link
+                    className="search-item"
+                    to={`/detail/${item.id}`}
+                    key={item.id}
+                  >
+                    {item.attributes.name}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </form>
       </div>
 
       <div className="tour my-5">

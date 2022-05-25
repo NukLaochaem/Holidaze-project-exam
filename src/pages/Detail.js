@@ -1,14 +1,6 @@
 import Layout from "../components/layout/Layout";
-import {
-  Container,
-  Carousel,
-  Button,
-  Modal,
-  Form,
-  Spinner,
-} from "react-bootstrap";
+import { Container, Button, Modal, Form, Spinner } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { RangeDatePicker } from "react-google-flight-datepicker";
 import "react-google-flight-datepicker/dist/main.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -22,7 +14,6 @@ const schema = yup.object().shape({
     .string()
     .required("Please enter your name")
     .min(3, "Your first name must be at least 3 characters"),
-
   email: yup
     .string()
     .required("Please enter an email address")
@@ -51,7 +42,7 @@ export default function HotelDetails() {
   const [loginError, setLoginError] = useState(null);
 
   const { id } = useParams();
-  const detailUrl = baseUrl + "api/hotels/" + id;
+  const detailUrl = baseUrl + "api/hotels/" + id + "?populate=image";
   const bookingUrl = baseUrl + "api/bookings";
   let navigate = useNavigate();
 
@@ -73,6 +64,7 @@ export default function HotelDetails() {
         const response = await axios.get(detailUrl);
         const hotel = response.data.data;
         setDetail(hotel);
+        console.log(hotel);
       } catch (error) {
         console.log(error);
       } finally {
@@ -103,7 +95,7 @@ export default function HotelDetails() {
       console.log(error);
       setLoginError(error.toString());
     } finally {
-      console.log("finally");
+      navigate("/confirmed");
     }
   }
 
@@ -118,66 +110,40 @@ export default function HotelDetails() {
   return (
     <Layout>
       <Container>
-        <Carousel interval={null} variant="dark">
-          <Carousel.Item>
-            <img
-              className="image-slider d-block w-400"
-              src="holder.js/800x400?text=First slide&bg=373940"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="image-slider d-block w-100"
-              src="holder.js/800x400?text=Second slide&bg=282c34"
-              alt="Second slide"
-            />
-
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="image-slider d-block w-100"
-              src="holder.js/800x400?text=Third slide&bg=20232a"
-              alt="Third slide"
-            />
-
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
+        {detail.attributes.image.data.map(function (img) {
+          return (
+            <div className="hotel-detail-img" key={detail.id}>
+              <img
+                src={img.attributes.formats.medium.url}
+                alt={detail.attributes.name}
+                className="img-fluid"
+              />
+            </div>
+          );
+        })}
 
         <div className="detail-container mb-5">
           <h1 className="">{detail.attributes.name}</h1>
 
           <p>
-            <i className="fa-solid fa-location-dot me-2"></i>
+            <i className="fa-solid fa-location-dot me-2 my-2"></i>
             {detail.attributes.location}
           </p>
           <h4 className="">Facilities</h4>
           <p className="my-4">
-            <i className="fa-solid fa-bed fa-lg mx-5"></i>
-            <i className="fa-solid fa-hotel fa-lg mx-5"></i>
-            <i className="fa-solid fa-map-location-dot fa-lg mx-5"></i>
-            <i className="fa-solid fa-ban-smoking fa-lg mx-5"></i>
+            <i className="fa-solid fa-bed fa-lg mx-4"></i>
+            <i className="fa-solid fa-hotel fa-lg mx-4"></i>
+            <i className="fa-solid fa-map-location-dot fa-lg mx-4"></i>
+            <i className="fa-solid fa-ban-smoking fa-lg mx-4"></i>
           </p>
           <h4 className="">Description</h4>
           <p className="">{detail.attributes.description}</p>
-          <h5 className="">{detail.attributes.price} Nok / Night</h5>
-          <Button className="btn-lg" onClick={handleShow}>
-            Book Now
-          </Button>
+          <div className="d-flex align-items-center justify-content-end">
+            <h5 className="me-3">{detail.attributes.price} Nok / Night</h5>
+            <Button className="btn-lg me-md-3" onClick={handleShow}>
+              Book Now
+            </Button>
+          </div>
         </div>
 
         <div className="modal-container">
@@ -219,13 +185,17 @@ export default function HotelDetails() {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="date">
-                  <Form.Label>Check in / Check out</Form.Label>
+                  <Form.Label>Check in</Form.Label>
                   <Form.Control type="date" {...register("checkin")} />
                   {errors.checkin && (
                     <Form.Text className="error">
                       {errors.checkin.message}
                     </Form.Text>
                   )}
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="date">
+                  <Form.Label>Check out</Form.Label>
                   <Form.Control type="date" {...register("checkout")} />
                   {errors.checkout && (
                     <Form.Text className="error">

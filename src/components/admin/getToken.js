@@ -9,6 +9,6 @@ function getFromStorage(key) {
 }
 getFromStorage();
 
-export function getToken() {
+export function GetToken() {
   return getFromStorage("jwt");
 }

@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../components/settings/api";
 import axios from "axios";
@@ -33,21 +33,23 @@ export default function Hotels() {
       </div>
 
       <Container>
-        <div className="row my-5 ">
+        <Row className="my-5 justify-content-center gap-5">
           {hotels.map((hotel) => {
             return (
-              <div
-                className="hotels-container p-0 col-md-6 col-lg-4"
+              <Col
+                md={5}
+                lg={3}
                 key={hotel.id}
+                className="hotels-container p-0"
               >
                 <div className="hotel-img-container">
                   <Link to={`/detail/${hotel.id}`}>
                     {hotel.attributes.image.data.map(function (img) {
                       return (
                         <img
-                          key={img.id}
                           src={img.attributes.formats.small.url}
                           alt={hotel.attributes.name}
+                          key={hotel.id}
                         />
                       );
                     })}
@@ -55,7 +57,10 @@ export default function Hotels() {
                 </div>
 
                 <div className="hotels-card-container p-3">
-                  <h2 className="hotles-name">{hotel.attributes.name}</h2>
+                  <Link to={`/detail/${hotel.id}`}>
+                    <h2 className="hotles-name">{hotel.attributes.name}</h2>
+                  </Link>
+
                   <p className="hotels-location mt-3">
                     <i className="fa-solid fa-location-dot me-2"></i>
                     {hotel.attributes.location}
@@ -64,10 +69,10 @@ export default function Hotels() {
                     Nok {hotel.attributes.price} / Night
                   </h3>
                 </div>
-              </div>
+              </Col>
             );
           })}
-        </div>
+        </Row>
       </Container>
     </Layout>
   );

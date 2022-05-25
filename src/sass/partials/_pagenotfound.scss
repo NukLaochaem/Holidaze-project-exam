@@ -1,0 +1,15 @@
+.notfound-container{
+  background-color: $bg-color;
+  h1{
+    font-size: 5rem;
+  }
+  h3{
+    font-size: 3rem;
+    font-weight: 400;
+  }
+  a{
+    font-weight: 500;
+    margin-top: 1rem;
+    border-bottom: 1px solid black;
+  }
+}

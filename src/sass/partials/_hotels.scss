@@ -21,20 +21,25 @@
 
   .hotel-img-container{
     background-color: #cccccc;
-    
     img{
     height: auto;
     width: 100%;
-
+    opacity: 1;
     }
     &:hover{
-      transform: "";
+      opacity: 0.7;
     }
   }
   
   .hotles-name{
     font-size: 1.3rem;
+    &:hover{
+      color: black;
+      text-decoration: underline 1px;
+      text-underline-offset: 3px;
+    }
   }
+
   .hotels-location{
     font-size: 0.6;
   }

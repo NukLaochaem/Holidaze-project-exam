@@ -35,14 +35,12 @@ export default function Login() {
   async function onSubmit(input) {
     setSubmitting(true);
     setLoginError(null);
-    console.log(input);
 
     try {
       const { data } = await axios.post(LoginUrl, {
         identifier: input.username,
         password: input.password,
       });
-      console.log(data);
 
       if (data.user) {
         setAuth(data);
@@ -108,13 +106,12 @@ export default function Login() {
 }
 
 /* 
-contact - display success message
-
-booking - date picker, display success message
-
-admin- add display success 
-
 nav - login to logout if token exist
 
-search bar - filter & display
+contact - display success message
+booking - display success message
+admin- add display success 
+
+
+all error message async 
 */
