@@ -1,24 +1,24 @@
-.hotel-detail-img{
-  
+.detail-container {
+
   img{
     background-color: grey;
-    max-width: 100%;
     height: auto;
-
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
-}
-.detail-container{
-  padding: 1rem 1rem;
-  background-color: white;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  button{
-    @include buttonColorSecondary;
-  }
 
+  .hotel-detail-container{
+    background-color: white;
+    margin: auto;
+    max-width: 750px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    button{
+      @include buttonColorSecondary;
+    }
+  }
 }
+
 
 
 .modal-container{

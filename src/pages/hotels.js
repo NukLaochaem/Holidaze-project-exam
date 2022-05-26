@@ -33,7 +33,7 @@ export default function Hotels() {
       </div>
 
       <Container>
-        <Row className="my-5 justify-content-center gap-5">
+        <Row className="my-5 justify-content-around gap-5">
           {hotels.map((hotel) => {
             return (
               <Col

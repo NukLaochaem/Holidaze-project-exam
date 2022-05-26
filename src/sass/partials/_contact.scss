@@ -1,5 +1,12 @@
 .form-container{
   background-color: white;
+  .contact-success{
+    font-weight: 500px;
+    display: block;
+    background-color: #d9f5e0;
+    color: green;
+    padding: 5px 0px;
+  }
   button{
     @include buttonColorPrimary;
   }  

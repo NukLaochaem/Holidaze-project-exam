@@ -11,71 +11,76 @@ import { GetToken } from "./GetToken";
 const AddHotelUrl = baseUrl + "api/hotels";
 
 const schema = yup.object().shape({
-  hotelname: yup.string().required("Enter Hotel name"),
-  location: yup.string().required("Enter Hotel location"),
-  price: yup
-    .number("Hotel price must be a number")
-    .required("Enter Hotel price"),
-  detail: yup.string().required("Enter Hotel detail"),
+  hotelname: yup.string().trim().required("Enter Hotel name"),
+  location: yup.string().trim().required("Enter Hotel location"),
+  price: yup.number("Price must be a number").required("Enter Hotel price"),
+  description: yup.string().trim().required("Enter Hotel description"),
   image: yup.mixed().required("image required"),
 });
 
 export default function AddHotel() {
   const [submitting, setSubmitting] = useState(false);
-  const [formError, setformError] = useState(null);
+  const [Error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const authToken = GetToken();
   const token = authToken.jwt;
-
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   async function onSubmit(input) {
+    setSubmitting(true);
+
     const formData = new FormData();
     const data = {
       name: input.hotelname,
       location: input.location,
       price: input.price,
-      detail: input.detail,
-      image: input.image,
+      description: input.description,
     };
-
+    console.log(data);
     const file = input.image[0];
 
     formData.append("files.image", file, file.name);
     formData.append("data", JSON.stringify(data));
 
-    const options = {
-      method: "POST",
-      body: formData,
-    };
+    reset();
 
     try {
       const response = await axios({
         url: AddHotelUrl,
-        options,
+        method: "POST",
+        data: formData,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       console.log(response);
+      setSuccess("Hotel has been added");
+      setError(null);
     } catch (error) {
       console.log(error);
+      setError("Error! Something went wrong, try again later");
+    } finally {
+      setSubmitting(false);
     }
   }
 
   return (
     <Container className="add-container bg-white my-5 p-5">
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="mb-3">Add new hotel</h2>
+        {success && <h5 className="addHotel-success text-center">{success}</h5>}
+        {Error && <h5 className="error text-center">{Error} </h5>}
+        <h2 className="mb-3">Add new hotel </h2>
 
         <fieldset disabled={submitting}>
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-4">
             <Form.Control
               type="text"
               placeholder="Hotel name"
@@ -88,7 +93,7 @@ export default function AddHotel() {
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-4">
             <Form.Control
               type="text"
               placeholder="Location"
@@ -99,7 +104,7 @@ export default function AddHotel() {
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-4">
             <Form.Control
               type="number"
               placeholder="Price"
@@ -114,16 +119,18 @@ export default function AddHotel() {
             <Form.Control
               as="textarea"
               rows={4}
-              placeholder="Details"
-              {...register("detail")}
+              placeholder="description"
+              {...register("description")}
             />
-            {errors.detail && (
-              <Form.Text className="error">{errors.detail.message}</Form.Text>
+            {errors.description && (
+              <Form.Text className="error">
+                {errors.description.message}
+              </Form.Text>
             )}
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Image file-szie should be less then 200KB</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               className="form-control"
               type="file"
@@ -135,8 +142,9 @@ export default function AddHotel() {
             )}
           </Form.Group>
         </fieldset>
-
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {submitting ? "Processing . . ." : "Submit"}
+        </Button>
       </Form>
     </Container>
   );

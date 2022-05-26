@@ -17,19 +17,21 @@ const schema = yup.object().shape({
 
   subject: yup
     .string()
-    .required("The subject field is reqiored")
+    .trim()
+    .required("The subject field is required")
     .min(5, "Subject must be at least 5 characters"),
 
   message: yup
     .string()
+    .trim()
     .required("Please enter your message")
     .min(10, "The message must be at least 10 characters"),
 });
 
 export default function Contact() {
-  const [submitting, setSubmitting] = useState(false);
   const [formError, setformError] = useState(null);
-  const [loginSuccess, setLoginSuccess] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const {
     register,
@@ -42,8 +44,8 @@ export default function Contact() {
   });
 
   async function onSubmit(data) {
-    console.log(data);
-
+    setSubmitting(true);
+    reset();
     try {
       const response = await axios.post(contactUrl, {
         data: {
@@ -54,11 +56,10 @@ export default function Contact() {
       });
       console.log(response);
       setformError(null);
-      setLoginSuccess("Your message has been sent.");
-      reset(response);
+      setSuccess("Your message has been sent!");
     } catch (error) {
       console.log(error);
-      setformError(error.toString());
+      setformError("Error! Something went wrong, try again later");
     } finally {
       setSubmitting(false);
     }
@@ -122,10 +123,9 @@ export default function Contact() {
         <Container className="form-container py-4 px-5 my-5">
           <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
             {formError && <h5 className="error text-center">{formError} </h5>}
-            {loginSuccess && (
-              <h5 className="success text-center">{loginSuccess} </h5>
+            {success && (
+              <h5 className="contact-success text-center">{success} </h5>
             )}
-
             <fieldset disabled={submitting}>
               <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email address</Form.Label>
@@ -159,8 +159,8 @@ export default function Contact() {
                   </Form.Text>
                 )}
               </Form.Group>
-              <Button type="submit" className="contact-btn mt-2 btn-lg">
-                Submit
+              <Button type="submit" className="contact-btn mt-2">
+                {submitting ? "Sending . . ." : "Send"}
               </Button>
             </fieldset>
           </Form>

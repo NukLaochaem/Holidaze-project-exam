@@ -46,14 +46,9 @@ export default function Login() {
         setAuth(data);
         navigate("/admin");
       }
-
-      if (data.error) {
-        //display error message
-      }
     } catch (error) {
       console.log(error);
-      setLoginError(error.toString());
-      //display error message
+      setLoginError("Error! Something went wrong, try again later");
     } finally {
       setSubmitting(false);
     }
@@ -96,7 +91,7 @@ export default function Login() {
             </Form.Group>
 
             <Button type="submit" className="my-2">
-              {submitting ? "Loggin in..." : "Login"}
+              {submitting ? "Loggin in. . ." : "Login"}
             </Button>
           </fieldset>
         </Form>
@@ -107,11 +102,9 @@ export default function Login() {
 
 /* 
 nav - login to logout if token exist
+detail - no ID send back home
 
-contact - display success message
-booking - display success message
-admin- add display success 
+adding new hotel, check for space for input, must be letter
 
-
-all error message async 
+input force - color?
 */
