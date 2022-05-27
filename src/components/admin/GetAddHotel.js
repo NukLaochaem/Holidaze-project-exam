@@ -2,7 +2,6 @@ import { Container, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { baseUrl } from "../settings/api";
 import axios from "axios";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -18,7 +17,7 @@ const schema = yup.object().shape({
   image: yup.mixed().required("image required"),
 });
 
-export default function AddHotel() {
+export default function GetAddHotel() {
   const [submitting, setSubmitting] = useState(false);
   const [Error, setError] = useState(null);
   const [success, setSuccess] = useState(null);

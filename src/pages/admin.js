@@ -1,8 +1,8 @@
-import Layout from "../components/layout/Layout";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../auth/AuthContex";
+import Layout from "../components/layout/Layout";
 import GetContact from "../components/admin/GetContact";
 import GetBooking from "../components/admin/GetBooking";
 import GetAddHotel from "../components/admin/GetAddHotel";
