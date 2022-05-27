@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../components/settings/api";
 import axios from "axios";
@@ -9,7 +9,7 @@ const hotelsUrl = baseUrl + "api/hotels?populate=*";
 
 export default function Hotels() {
   const [hotels, setHotels] = useState([]);
-  //const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
@@ -20,11 +20,24 @@ export default function Hotels() {
       } catch (error) {
         console.log(error);
       } finally {
+        setLoading(false);
       }
     }
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="text-center mt-5">
+          <Spinner animation="grow" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

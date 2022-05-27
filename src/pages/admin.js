@@ -8,12 +8,9 @@ import GetBooking from "../components/admin/GetBooking";
 import GetAddHotel from "../components/admin/GetAddHotel";
 
 export default function Admin() {
-  const [auth, setAuth] = useContext(AuthContext);
-  let navigate = useNavigate();
+  const [setAuth] = useContext(AuthContext);
 
-  if (!auth) {
-    navigate("/login");
-  }
+  let navigate = useNavigate();
 
   function logout() {
     setAuth(null);

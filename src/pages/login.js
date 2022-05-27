@@ -101,10 +101,9 @@ export default function Login() {
 }
 
 /* 
-nav - login to logout if token exist
-detail - no ID send back home
+
+
 
 adding new hotel, check for space for input, must be letter
 
-input force - color?
 */

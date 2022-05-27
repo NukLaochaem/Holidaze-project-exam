@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container, Button, Modal, Form } from "react-bootstrap";
+import { Container, Button, Modal, Form, Spinner } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "react-google-flight-datepicker/dist/main.css";
 import { useForm } from "react-hook-form";
@@ -36,17 +36,12 @@ export default function HotelDetails() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
-
   const [detail, setDetail] = useState(null);
   const [submitting, setSubmitting] = useState(false);
-
-  //const [loading, setLoading] = useState(true);
-  //const [loginError, setLoginError] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const detailUrl = baseUrl + "api/hotels/" + id + "?populate=image";
   const bookingUrl = baseUrl + "api/bookings";
-
   let navigate = useNavigate();
 
   const {
@@ -57,22 +52,6 @@ export default function HotelDetails() {
     mode: "onChange",
     resolver: yupResolver(schema),
   });
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(detailUrl);
-        const hotel = response.data.data;
-        setDetail(hotel);
-        console.log(hotel);
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
-    }
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   async function onSubmit(input) {
     setSubmitting(true);
@@ -95,17 +74,38 @@ export default function HotelDetails() {
       navigate("/confirmed");
     }
   }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(detailUrl);
+        const hotel = response.data.data;
+        setDetail(hotel);
+        console.log(hotel);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="text-center mt-5">
+          <Spinner animation="grow" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <Container className="p-0">
-        <h1>{detail.attributes.name}</h1>
-      </Container>
-    </Layout>
-  );
-}
-
-/*
         <div className="detail-container">
           {detail.attributes.image.data.map(function (img) {
             return (
@@ -208,5 +208,7 @@ export default function HotelDetails() {
             </Form>
           </Modal>
         </div>
-
-      */
+      </Container>
+    </Layout>
+  );
+}
