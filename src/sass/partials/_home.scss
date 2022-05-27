@@ -52,7 +52,7 @@
 }
 
 .tour{
-  background-image: url("../../../public/image/fjords.jpg");
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) , url("../../../public/image/fjords.jpg");
   background-position: left bottom;
   background-repeat: no-repeat; 
   background-color: #cccccc;

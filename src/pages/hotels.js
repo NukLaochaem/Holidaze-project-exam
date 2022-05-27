@@ -42,7 +42,9 @@ export default function Hotels() {
   return (
     <Layout>
       <div className="jumbotron jumbotron-fluid hotels-banner">
-        <h1 className="hotels-banner-text">See all our hotels</h1>
+        <h1 className="hotels-banner-text text-center">
+          See all our accommodation
+        </h1>
       </div>
 
       <Container>
@@ -53,7 +55,7 @@ export default function Hotels() {
                 md={5}
                 lg={3}
                 key={hotel.id}
-                className="hotels-container p-0"
+                className="hotels-container p-0 my-4"
               >
                 <div className="hotel-img-container">
                   <Link to={`/detail/${hotel.id}`}>
@@ -78,6 +80,10 @@ export default function Hotels() {
                     <i className="fa-solid fa-location-dot me-2"></i>
                     {hotel.attributes.location}
                   </p>
+                  <div className="d-flex">
+                    <p className="Facilities me-3">Wifi</p>
+                    <p className="Facilities">Non-Smoking</p>
+                  </div>
                   <h3 className="hotels-price">
                     Nok {hotel.attributes.price} / Night
                   </h3>

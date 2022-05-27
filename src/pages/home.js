@@ -43,11 +43,15 @@ export default function Home() {
     <Layout>
       <div className="jumbotron jumbotron-fluid home-hero-container">
         <div className="home-text-wrapper">
-          <h1 className="landing-text">Welcome to Bergen?</h1>
+          <h1 className="landing-text text-center">Welcome to Bergen?</h1>
         </div>
 
         <form className="search-form-container">
-          <input type="text" placeholder="Search.." onChange={handleFilter} />
+          <input
+            type="text"
+            placeholder="Search for hotels.."
+            onChange={handleFilter}
+          />
 
           {filteredResults.length !== 0 && (
             <div>
@@ -68,7 +72,7 @@ export default function Home() {
       </div>
 
       <div className="tour my-5">
-        <h2 className="tour-text">Fjordcruise Tour From Bergen</h2>
+        <h2 className="tour-text text-center">Fjordcruise Tour From Bergen</h2>
       </div>
 
       <div className="container my-5">
