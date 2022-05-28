@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../components/settings/api";
 import axios from "axios";
@@ -47,16 +47,11 @@ export default function Hotels() {
         </h1>
       </div>
 
-      <Container>
-        <Row className="my-5 justify-content-around gap-5">
+      <Container className="p-0">
+        <div className="my-5 grid-container">
           {hotels.map((hotel) => {
             return (
-              <Col
-                md={5}
-                lg={3}
-                key={hotel.id}
-                className="hotels-container p-0 my-4"
-              >
+              <div key={hotel.id} className="hotels-container">
                 <div className="hotel-img-container">
                   <Link to={`/detail/${hotel.id}`}>
                     {hotel.attributes.image.data.map(function (img) {
@@ -81,17 +76,24 @@ export default function Hotels() {
                     {hotel.attributes.location}
                   </p>
                   <div className="d-flex">
-                    <p className="Facilities me-3">Wifi</p>
-                    <p className="Facilities">Non-Smoking</p>
+                    <p className="me-4">
+                      <i className="fa-solid fa-wifi me-1"></i>Wifi
+                    </p>
+                    <p className="me-4">
+                      <i className="fa-solid fa-square-parking me-1"></i>Parking
+                    </p>
+                    <p>
+                      <i className="fa-solid fa-bath me-1"></i>Bath
+                    </p>
                   </div>
-                  <h3 className="hotels-price">
+                  <h3 className="hotels-price ms-1">
                     Nok {hotel.attributes.price} / Night
                   </h3>
                 </div>
-              </Col>
+              </div>
             );
           })}
-        </Row>
+        </div>
       </Container>
     </Layout>
   );

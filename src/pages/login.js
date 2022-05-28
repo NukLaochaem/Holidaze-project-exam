@@ -56,8 +56,8 @@ export default function Login() {
 
   return (
     <Layout>
-      <Container className="login-container p-4 my-5">
-        <h1 className="login-header py-2 text-center">Admin Login page</h1>
+      <Container className="login-container p-4 p-lg-5 my-5">
+        <h1 className="login-header text-center">Admin Login page</h1>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           {loginError && <h5 className="error">{loginError}</h5>}
@@ -99,11 +99,3 @@ export default function Login() {
     </Layout>
   );
 }
-
-/* 
-
-
-
-adding new hotel, check for space for input, must be letter
-
-*/

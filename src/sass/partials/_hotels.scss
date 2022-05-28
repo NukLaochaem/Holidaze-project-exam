@@ -15,11 +15,26 @@
     transform: translate(-50%, 0);
   }
 }
-
+.grid-container{
+  display: grid; 
+  grid-template-columns: 1fr;
+  grid-gap: 50px;
+}
+@media (min-width: 768px){
+  .grid-container{
+    grid-template-columns: 1fr 1fr;
+  }
+  
+}
+@media (min-width: 992px){
+  .grid-container{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+ 
+}
 .hotels-container {
    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
    transition: transform .3s ease;
-
   &:hover{
     transform: scale(1.05);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -33,7 +48,6 @@
     opacity: 1;
     }
   }
-  
   .hotles-name{
     font-size: 1.3rem;
     &:hover{
@@ -46,19 +60,9 @@
   .hotels-price{
     font-size: 1.2rem
   }
-  .Facilities{
-    padding: 5px 10px;
-    border-radius: 20px;
-    background-color: rgb(216, 216, 216);
-    border: 1px solid rgb(126, 126, 126);
-    font-size: 0.9rem;
+  .fa-wifi, .fa-square-parking, .fa-bath{
+    color: $carrot;
   }
-  @media (min-width: 992px){
-    .col-lg-4{
-      width: 30%;
-    }
-  }
-  .col-lg-4{
-    width: 30%;
-  }
+  
 }
+  

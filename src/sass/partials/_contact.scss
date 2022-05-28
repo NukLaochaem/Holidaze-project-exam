@@ -1,18 +1,5 @@
-.form-container{
-  background-color: white;
-  .contact-success{
-    font-weight: 500px;
-    display: block;
-    background-color: #d9f5e0;
-    color: green;
-    padding: 5px 0px;
-  }
-  button{
-    @include buttonColorPrimary;
-  }  
-}
-
 .accordion-container{
+  max-width: 750px;
   button{
     font-weight: 500;
     font-size: 1rem;
@@ -27,4 +14,22 @@
     border-color: rgba(0,0,0,.125);
   } 
 }
+
+
+.form-container{
+  max-width: 750px;
+  background-color: white;
+  .contact-success{
+    font-weight: 500px;
+    display: block;
+    background-color: #d9f5e0;
+    color: green;
+    padding: 5px 0px;
+  }
+  button{
+    @include buttonColorPrimary;
+  }  
+}
+
+
 

@@ -66,106 +66,95 @@ export default function Contact() {
   }
   return (
     <Layout>
-      <div className="contact-background">
-        <Container>
-          <h1 className="my-4 text-center">Contact page</h1>
-          <div className="accordion-container my-5">
-            <Accordion>
-              <h2 className="h5 ms-1">Frequently Asked Questions</h2>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>
-                  CHANGE OR CANCEL A RESERVATION
-                </Accordion.Header>
-                <Accordion.Body>
-                  <p>
-                    Some bookings can be cancelled or change in the app from the
-                    "Booking details" page. If the Cancel button is not
-                    available then please contact Customer Services if you
-                    believe that your booking is cancellable.
-                  </p>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>
-                  WHAT ARE YOUR CHECK-IN/CHECK-OUT TIMES?
-                </Accordion.Header>
-                <Accordion.Body>
-                  <p>- Check-in time: guaranteed from 3pm</p>
-                  <p>- Check-out time: before 12 noon</p>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="3">
-                <Accordion.Header>PARKING</Accordion.Header>
-                <Accordion.Body>
-                  <p>
-                    You can reserve parking spaces at some hotels. If you wish
-                    to reserve a space, please contact the hotel reception or as
-                    an add-on once you have made your booking.
-                  </p>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="4">
-                <Accordion.Header>
-                  WHAT RULES ARE THERE FOR GUIDE DOGS?
-                </Accordion.Header>
-                <Accordion.Body>
-                  <p>
-                    You are more than welcome to bring your guide dog to stay
-                    with you in your room. You will not be charged to have your
-                    guide dog staying with you in your room.
-                  </p>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-          </div>
-        </Container>
+      <Container className="accordion-container my-5">
+        <h1 className="my-4 text-center">Contact page</h1>
+        <Accordion>
+          <h2 className="h5 ms-1">Frequently Asked Questions</h2>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>CHANGE OR CANCEL A RESERVATION</Accordion.Header>
+            <Accordion.Body>
+              <p>
+                Some bookings can be cancelled or change in the app from the
+                "Booking details" page. If the Cancel button is not available
+                then please contact Customer Services if you believe that your
+                booking is cancellable.
+              </p>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>
+              WHAT ARE YOUR CHECK-IN/CHECK-OUT TIMES?
+            </Accordion.Header>
+            <Accordion.Body>
+              <p>- Check-in time: guaranteed from 3pm</p>
+              <p>- Check-out time: before 12 noon</p>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="3">
+            <Accordion.Header>PARKING</Accordion.Header>
+            <Accordion.Body>
+              <p>
+                You can reserve parking spaces at some hotels. If you wish to
+                reserve a space, please contact the hotel reception or as an
+                add-on once you have made your booking.
+              </p>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="4">
+            <Accordion.Header>
+              WHAT RULES ARE THERE FOR GUIDE DOGS?
+            </Accordion.Header>
+            <Accordion.Body>
+              <p>
+                You are more than welcome to bring your guide dog to stay with
+                you in your room. You will not be charged to have your guide dog
+                staying with you in your room.
+              </p>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </Container>
 
-        <Container className="form-container py-4 px-5 my-5">
-          <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
-            {formError && <h5 className="error text-center">{formError} </h5>}
-            {success && (
-              <h5 className="contact-success text-center">{success} </h5>
-            )}
-            <fieldset disabled={submitting}>
-              <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  placeholder="Enter email"
-                  {...register("email")}
-                />
-                {errors.email && (
-                  <Form.Text className="error">
-                    {errors.email.message}
-                  </Form.Text>
-                )}
-              </Form.Group>
+      <Container className="form-container py-4 px-5 my-5">
+        <Form onSubmit={handleSubmit(onSubmit)} className="my-4">
+          {formError && <h5 className="error text-center">{formError} </h5>}
+          {success && (
+            <h5 className="contact-success text-center">{success} </h5>
+          )}
+          <fieldset disabled={submitting}>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control placeholder="Enter email" {...register("email")} />
+              {errors.email && (
+                <Form.Text className="error">{errors.email.message}</Form.Text>
+              )}
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="subject">
-                <Form.Label>Subject</Form.Label>
-                <Form.Control placeholder="Subject" {...register("subject")} />
-                {errors.subject && (
-                  <Form.Text className="error">
-                    {errors.subject.message}
-                  </Form.Text>
-                )}
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="subject">
+              <Form.Label>Subject</Form.Label>
+              <Form.Control placeholder="Subject" {...register("subject")} />
+              {errors.subject && (
+                <Form.Text className="error">
+                  {errors.subject.message}
+                </Form.Text>
+              )}
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="message">
-                <Form.Label>Message</Form.Label>
-                <Form.Control as="textarea" rows={4} {...register("message")} />
-                {errors.message && (
-                  <Form.Text className="error">
-                    {errors.message.message}
-                  </Form.Text>
-                )}
-              </Form.Group>
-              <Button type="submit" className="contact-btn mt-2">
-                {submitting ? "Sending . . ." : "Send"}
-              </Button>
-            </fieldset>
-          </Form>
-        </Container>
-      </div>
+            <Form.Group className="mb-3" controlId="message">
+              <Form.Label>Message</Form.Label>
+              <Form.Control as="textarea" rows={4} {...register("message")} />
+              {errors.message && (
+                <Form.Text className="error">
+                  {errors.message.message}
+                </Form.Text>
+              )}
+            </Form.Group>
+            <Button type="submit" className="contact-btn mt-2">
+              {submitting ? "Sending . . ." : "Send"}
+            </Button>
+          </fieldset>
+        </Form>
+      </Container>
     </Layout>
   );
 }

@@ -80,7 +80,6 @@ export default function HotelDetails() {
         const response = await axios.get(detailUrl);
         const hotel = response.data.data;
         setDetail(hotel);
-        console.log(hotel);
       } catch (error) {
         console.log(error);
       } finally {
@@ -125,11 +124,11 @@ export default function HotelDetails() {
               <i className="fa-solid fa-location-dot me-2 my-2"></i>
               {detail.attributes.location}
             </p>
-            <h4 className="">Facilities</h4>
+            <h4>Facilities</h4>
             <p className="my-4">
-              <i className="fa-solid fa-bed fa-lg mx-4"></i>
-              <i className="fa-solid fa-hotel fa-lg mx-4"></i>
-              <i className="fa-solid fa-map-location-dot fa-lg mx-4"></i>
+              <i className="fa-solid fa-wifi fa-lg mx-4"></i>
+              <i className="fa-solid fa-parking fa-lg mx-4"></i>
+              <i className="fa-solid fa-bath fa-lg mx-4"></i>
               <i className="fa-solid fa-ban-smoking fa-lg mx-4"></i>
             </p>
             <h4 className="">Description</h4>
