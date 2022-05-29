@@ -28,10 +28,10 @@ function Layout({ children }) {
                 Home
               </NavLink>
               <NavLink
-                to="/hotels"
+                to="/accommodation"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
-                Hotels
+                Accommodation
               </NavLink>
               <NavLink
                 to="/contact"
@@ -79,7 +79,7 @@ function Layout({ children }) {
             </Link>
           </div>
           <Link to="/">Home</Link>
-          <Link to="/hotels">Hotels</Link>
+          <Link to="/accommodation">Accommodation</Link>
           <Link to="/contact">Contact</Link>
           <p className="footer-text mt-4">
             Holidaze is a local tourism agency in Bergen

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 const hotelsUrl = baseUrl + "api/hotels?populate=*";
 
-export default function Hotels() {
+export default function Accommodation() {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +30,11 @@ export default function Hotels() {
   if (loading) {
     return (
       <Layout>
+        <div className="jumbotron jumbotron-fluid hotels-banner">
+          <h1 className="hotels-banner-text text-center">
+            See all our accommodation
+          </h1>
+        </div>
         <div className="text-center mt-5">
           <Spinner animation="grow" role="status">
             <span className="visually-hidden">Loading...</span>

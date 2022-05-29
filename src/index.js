@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "./pages/admin";
 import Contact from "./pages/contact";
 import Detail from "./pages/Detail";
-import Hotels from "./pages/hotels";
+import Accommodation from "./pages/accommodation";
 import Login from "./pages/login";
 import Home from "./pages/home";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -21,7 +21,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/hotels" element={<Hotels />}></Route>
+          <Route path="/accommodation" element={<Accommodation />}></Route>
           <Route path="/detail/:id" element={<Detail />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -33,14 +33,7 @@ root.render(
               </ProtectedRoutes>
             }
           ></Route>
-          <Route
-            path="/Confirmed"
-            element={
-              <ProtectedRoutes>
-                <Confirmed />
-              </ProtectedRoutes>
-            }
-          ></Route>
+          <Route path="/Confirmed" element={<Confirmed />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
       </BrowserRouter>
