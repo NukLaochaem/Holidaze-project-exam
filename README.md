@@ -7,10 +7,6 @@ A local tourism agency in Bergen is launching a new website called â€˜Holidazeâ€
 
 ### The Project:
 
-- Admin page to edit, add Hotels
-- Show contact message and bookings at Admin section
-- Responsive on all devices
-
 #### Visitor side
 
 - Homepage
@@ -36,7 +32,6 @@ A local tourism agency in Bergen is launching a new website called â€˜Holidazeâ€
 - Javascript
 - Bootstrap
 
-
 ## Getting Started
 
 ### Installing
@@ -52,10 +47,6 @@ npm install
 
 npm run dev
 ```
-
-- email: admin@admin.com
-- username: admin
-- password: Pass1234
 
 #### Username & Password
 username: "holidaze-admin" <br>
