@@ -47,8 +47,9 @@ npm install
 
 npm run dev
 ```
-Live site <a href="https://holidaze-project.vercel.app/">Here</a>
 
 #### Username & Password
 username: "holidaze-admin" <br>
 password: "pass1234"
+
+Live site <a href="https://holidaze-project.vercel.app/">Here</a>
