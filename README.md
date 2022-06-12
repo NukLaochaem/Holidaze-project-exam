@@ -52,4 +52,4 @@ npm run dev
 username: "holidaze-admin" <br>
 password: "pass1234"
 
-Live site <a href="https://holidaze-project.vercel.app/">Here</a>
+### Live site <a href="https://holidaze-project.vercel.app/">Here</a>
